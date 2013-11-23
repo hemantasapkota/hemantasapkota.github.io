@@ -1,0 +1,36 @@
+{
+  "main": "app.js",
+  
+  "generatedDir": "${appRoot}/generated",
+  "dataDir": "${appRoot}/data",
+  "assets": {
+    "assetsDir": "${generatedDir}/assets",
+    "viewsDir": "${generatedDir}/views",
+    "publicUrlRoot": "/public"
+  },
+  
+  "logger": {
+    "default": {
+      "config": {
+        "console": {
+          "level": "verbose",
+          "colorize": true
+        }
+      }
+    },
+    "modules": {
+      "Access": {
+        "disabled": true
+      },
+      "Scatter": {
+        "config": {
+          "console": {
+            "level": "info",
+            "colorize": true
+          }
+        }
+      }
+    }
+  },
+  "next": "custom.json"
+}
