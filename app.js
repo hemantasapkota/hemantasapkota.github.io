@@ -1,3 +1,3 @@
 
 //...and here the magic starts...
-require('particles').run(__dirname);
+require('particles').run();
