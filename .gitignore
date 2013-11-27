@@ -3,5 +3,5 @@
 .idea
 npm-debug.log
 config/overrides.json
-data
+/data
 generated
