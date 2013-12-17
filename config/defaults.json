@@ -8,28 +8,22 @@
     "viewsDir": "${generatedDir}/views",
     "publicUrlRoot": "/public"
   },
-  
+
   "logger": {
-    "default": {
-      "config": {
-        "console": {
-          "level": "verbose",
-          "colorize": true
-        }
-      }
-    },
-    "modules": {
-      "Access": {
-        "disabled": true
-      },
-      "Scatter": {
-        "config": {
-          "console": {
-            "level": "info",
-            "colorize": true
+    "root": {
+      "level": "info",
+      "streams": [
+        {
+          "level": "debug",
+          "stream": "process.stdout",
+          "streamOptions": {
+            "mode": "short", "prettyPrint": true
           }
         }
-      }
+      ]
+    },
+    "express/access": {
+      "level": "none"
     }
   },
   "next": "custom.json"

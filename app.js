@@ -1,3 +1,5 @@
 
 //...and here the magic starts...
-require('particles').run();
+var ParticlesApp = require('particles');
+var app = new ParticlesApp();
+app.run();
