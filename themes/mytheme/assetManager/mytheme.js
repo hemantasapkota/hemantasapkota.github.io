@@ -3,10 +3,14 @@
 module.exports = {
   __module: {
     provides: {
-      use_scripts: {},
-      use_stylesheets: {},
-      register_assets_dir: {after: ['assetManager/bootstrap', 'assetManager/hadron', 'assetManager/hadron-theme-nodus']},
-      register_views_dir: {after: ['assetManager/bootstrap', 'assetManager/hadron', 'assetManager/hadron-theme-nodus']}
+      "assetManager/use_scripts": {},
+      "assetManager/use_stylesheets": {},
+      "assetManager/register_assets_dir": {
+        after: ['assetManager/bootstrap', 'assetManager/hadron', 'assetManager/hadron-theme-nodus']
+      },
+      "assetManager/register_views_dir": {
+        after: ['assetManager/bootstrap', 'assetManager/hadron', 'assetManager/hadron-theme-nodus']
+      }
     }
   },
 
