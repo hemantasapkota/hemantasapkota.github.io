@@ -3,10 +3,11 @@
   
   "generatedDir": "${appRoot}/generated",
   "dataDir": "${appRoot}/data",
-  "assets": {
+  "resources": {
     "assetsDir": "${generatedDir}/assets",
     "viewsDir": "${generatedDir}/views",
-    "publicUrlRoot": "/public"
+    "bundlesSubDir": "build",
+    "staticUrlRoot": "/public/"
   },
 
   "logger": {
