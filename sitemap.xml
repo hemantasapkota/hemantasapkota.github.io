@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://github.com/hemantasapkota/hemantas-blog/../blog.html</loc>
+    <lastmod>2014-03-27T23:27:04.926Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://github.com/hemantasapkota/hemantas-blog/../index.html</loc>
+    <lastmod>2014-03-27T23:27:04.928Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>
