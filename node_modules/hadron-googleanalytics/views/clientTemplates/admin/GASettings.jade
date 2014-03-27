@@ -1,0 +1,10 @@
+.page-admin-savesettings
+  .panel.panel-default
+    .panel-heading Google Analytics
+    .panel-body
+      form(role="form", name="ga", novalidate)
+        div.form-group(ng-class="{'has-error': hasError('ga.code')}")
+          label.control-label(for="code") Tracking code
+          input.form-control(name="code", ng-model="settings.googleanalytics.trackingCode")
+        div.actions
+          a.btn.btn-primary(type="button", ng-click="save(settings, social.$invalid)") Save

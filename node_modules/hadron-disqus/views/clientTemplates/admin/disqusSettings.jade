@@ -1,0 +1,10 @@
+.page-admin-savesettings
+  .panel.panel-default
+    .panel-heading Disqus
+    .panel-body
+      form(role="form", name="disqus", novalidate)
+        div.form-group(ng-class="{'has-error': hasError('disqus.forumShortname')}")
+          label.control-label(for="forumShortname") Forum Shortname
+          input.form-control(name="forumShortname", ng-model="settings.disqus.forumShortname")
+        div.actions
+          a.btn.btn-primary(type="button", ng-click="save(settings, social.$invalid)") Save

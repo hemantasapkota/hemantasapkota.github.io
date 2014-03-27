@@ -1,0 +1,4 @@
+{
+  "name": "hadron-googleanalytics",
+  "overrides": ["hadron"]
+}
