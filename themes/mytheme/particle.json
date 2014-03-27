@@ -1,6 +1,0 @@
-{
-  "name": "mytheme",
-  "exclude": [
-    "assets/**", "views/**"
-  ]
-}

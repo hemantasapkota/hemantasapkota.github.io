@@ -1,0 +1,17 @@
+{
+  "generator-assemble": {
+    "projectName": "Hemanta's Blog",
+    "projectDesc": "Personal Projects and Articles",
+    "authorLogin": "hemantasapkota",
+    "installPlugin": true,
+    "author": {
+      "name": "Hemanta Sapkota",
+      "login": "assemble",
+      "email": "hemanta@lumanetworks.com"
+    },
+    "plugins": [
+      "assemble-contrib-permalinks",
+      "assemble-contrib-sitemap"
+    ]
+  }
+}
