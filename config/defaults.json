@@ -1,0 +1,31 @@
+{
+  "main": "app.js",
+  
+  "generatedDir": "${appRoot}/generated",
+  "dataDir": "${appRoot}/data",
+  "resources": {
+    "assetsDir": "${generatedDir}/assets",
+    "viewsDir": "${generatedDir}/views",
+    "bundlesSubDir": "build",
+    "staticUrlRoot": "/public/"
+  },
+
+  "logger": {
+    "root": {
+      "level": "info",
+      "streams": [
+        {
+          "level": "debug",
+          "stream": "process.stdout",
+          "streamOptions": {
+            "mode": "short", "prettyPrint": true
+          }
+        }
+      ]
+    },
+    "express/access": {
+      "level": "none"
+    }
+  },
+  "next": "custom.json"
+}
