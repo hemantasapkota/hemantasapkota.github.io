@@ -5,5 +5,5 @@ publishdir: "public"
 indexes:
   category: "categories"
 baseurl: "http://hemantasapkota.github.io"
-title: "Hemanta Sapkota's Blog"
+title: "Hugo Blog Template for GitHub Pages"
 ...
