@@ -11,9 +11,9 @@ categories:
 <p>Step 2: In Eclipse, create a new plugin project</p>
 <p><img src="images/img001.png" alt="" /></p>
 <p>Step 3: Next, you'll have to provide links to the JAR archives of LibGDX</p>
-<p><img src="images/hsapkota/eclipse_blog/img003.png" alt="" /></p>
+<p><img src="../images/img003.png" alt="" /></p>
 <p>Step 4: In the next step, fill in some parameters like plugin name and version number</p>
-<p><img src="images/hsapkota/eclipse_blog/img002.png" alt="" /> </p>
+<p><img src="../images/img002.png" alt="" /> </p>
 <p> After having gone through all the steps, you should be able to see the LibGDX eclipse plugin in your package explorer.</p>
-<p><img src="images/hsapkota/eclipse_blog/img004.png" alt="" /></p>
+<p><img src="../images/img004.png" alt="" /></p>
 <p> </p>
