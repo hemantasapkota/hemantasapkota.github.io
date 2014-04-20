@@ -11,7 +11,7 @@ rm -rf ../css
 rm -rf ../posts
 
 mv public/* ../
-git add -A .
+git add -A
 
 # Commit changes.
 msg="rebuilding site `date`"
