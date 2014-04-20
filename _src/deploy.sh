@@ -11,7 +11,6 @@ rm -rf ../css
 rm -rf ../posts
 
 mv public/* ../
-
 git add -A .
 
 # Commit changes.
