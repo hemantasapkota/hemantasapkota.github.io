@@ -58,7 +58,7 @@
         <section id="main">
           <ul id="list">
             {{ range first 10 .Data.Pages }}
-            {{ .Render "title"}}
+            {{ .Render "summary"}}
             {{ end }}
           </ul>
         </section>

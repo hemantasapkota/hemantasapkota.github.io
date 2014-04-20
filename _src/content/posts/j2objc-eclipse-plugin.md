@@ -1,7 +1,6 @@
 ---
 title: "J2ObjC Eclipse Plugin"
 description: "J2ObjC Eclipse Plugin, as the name says is an Eclipse plugin for interfacing Google's j2objc compiler in Eclipse."
-summary: "Summary"
 date: "2012-12-04"
 categories:
     - "Google J2OBJC"
