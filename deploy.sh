@@ -19,4 +19,4 @@ git commit -m "$msg"
 git push origin master
 # git subtree push --prefix=public git@github.com:hemantasapkota/hemantasapkota.github.io master
 # git subtree push --prefix=public https://github.com/hemantasapkota/hemantasapkota.github.io master
-git push origin `git subtree push --prefix=public origin master`:master --force
+git subtree push --prefix=public origin master
