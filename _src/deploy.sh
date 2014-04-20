@@ -7,7 +7,7 @@ hugo
 
 # Add changes to git.
 mv public/* ../
-git add -A
+git add -A .
 
 # Commit changes.
 msg="rebuilding site `date`"
