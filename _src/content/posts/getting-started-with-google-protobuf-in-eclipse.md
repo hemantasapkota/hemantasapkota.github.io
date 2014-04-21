@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with Google Protobuf - 1"
 description: "Google Protobuf is a great framework for serializing and deserializing data for your applications. In this series of article, we'll look into setting up Google Protobuf as an Eclipse Plugin and later integrate protobuf in your RCP applications."
-date: "2012-12-06"
+date: "2012-12-08"
 categories:
     - "Google Protobuf"
     - "Eclipse"
@@ -34,7 +34,7 @@ This process creates a target directory where you'll find protobuf-java-2.4.1.ja
 
 ##  2. Setting up Google Protobuf - Eclipse plugin ##
 
- Now, we create an eclipse plugin from existing JAR archive just like the way we did it here: [http://hsapkota.com.au/index.php/blog/eclipse/22-creating-eclipse-plugins-from-any-jar-archives-or-existing-frameworks][4]
+ Now, we create an eclipse plugin from existing JAR archive just like the way we did it [here][4].
 
 
 ### Create a new Eclipse plugin project from existing JAR archives
@@ -70,7 +70,7 @@ That's it for this part. In [Part II][10] , we'll look in creating a RCP applica
   [1]: http://code.google.com/p/protobuf/downloads/list
   [2]: images/23-img-005.png
   [3]: images/23-img-006.png
-  [4]: posts/creating-eclipse-plugins-from-any-jar-archives-or-existing-frameworks
+  [4]: posts/creating-eclipse-plugins-from-existing-java-frameworks/
   [5]: images/img001.png
   [6]: images/23-img-002.png
   [7]: images/23-img-001.png

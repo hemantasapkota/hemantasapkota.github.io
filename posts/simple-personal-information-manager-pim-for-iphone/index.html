@@ -1,0 +1,350 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="http://hemantasapkota.github.io/">
+    <title> Tutorial - Simple Personal Information Manager (PIM) for iPhone </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/simple-personal-information-manager-pim-for-iphone">
+    
+
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/syntax.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/lanyon.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/">Home</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/posts">Blog</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/categories/projects">Projects</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014 Hemanta Sapkota. Powered by <a href="http://hugo.spf13.com">Hugo</a>. Design adapted from <a href="http://lanyon.getpoole.com">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="http://hemantasapkota.github.io/posts" title="Blog">Blog Posts</a>
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">Tutorial - Simple Personal Information Manager (PIM) for iPhone</h1>
+        <section id="main">
+          <h5 id="date"> Thu Dec 13, 2012 </h5>
+          
+
+<p>Simple Personal Information Manager (PIM) is a basic app for iphone/ipod touch for managing personal information like email a/c, registration numbers, bank a/c. This is a one-stop app for conveniently looking up personal info when needed. Before we begin the tutorial, let&rsquo;s check out the output of this tutorial. The video shows what we intend to create during this tutorial.</p>
+
+<h2 id="toc_0">Creating the project</h2>
+
+<p>I&rsquo;ll be using Xcode 4.3.2 and testing the app in iPhone 3GS. Without further delays, create a new <strong>XCode Project</strong> and select <strong>Single View</strong> application for the <strong>iPhone </strong>platform. Select <strong>Automatic Reference Counting </strong>and <strong>Use Storyboards</strong>.</p>
+
+<p> <img src="images/26-img-001.png" alt="" />
+</p>
+
+<h2 id="toc_1">Setting up Navigation Controller and Root View Controller</h2>
+
+<p>At this point, if you click on <strong>MainStoryboard.storyboard</strong> you should see a single view. Remove this view and drag a <strong>Navigation Controller</strong> from the right, as shown in the image below.</p>
+
+<p><img src="images/26-img-002.png" alt="" />
+</p>
+
+<p>In the image above we have a <strong>Navigation controller</strong> linked up to a <strong>Root View Controller </strong>titled <strong>Simple PIM. </strong>You can change the title of the root view controller from the attributes inspector on the right. As of now, our root view controller is actually a <strong>Table View Controller</strong>. We will remove this and add a simple <strong>View Controller </strong>as a root view controller. So remove the <strong>Table View Controller</strong> by deleting it and drag a <strong>View Controller </strong>from the right. Once you have dragged it, you need to set this new view controller as the root view. So right click on the <strong>Navigation Controller </strong>and drag the click on to the view controller, as shown in the image below. Select <strong>Relationship - Root View Controller. </strong>This action sets up the newly created view controller as the root view of the navigation controller.</p>
+
+<p><img src="images/26-img-003.png" alt="" />
+ <img src="images/26-img-004.png" alt="" />
+</p>
+
+<p>Now click on the top navigation bar of the view controller and change the title to <strong>Simple PIM</strong>.</p>
+
+<h2 id="toc_2">UI Design</h2>
+
+<p>For the purpose of this tutorial, our root view will have only two buttons called <strong>Bank A/C</strong> and <strong>Gmail ID</strong>. In order to make the buttons look pretty, i have provided two gradient images for button. You can use them as background image to the buttons. Download and drag them to your project in XCode. For more information on how you can create such images, see <a href="https://github.com/dermdaly/ButtonMaker">https://github.com/dermdaly/ButtonMaker</a></p>
+
+<p><img src="images/26-blue6_button.png" alt="" />
+ <img src="images/26-green8_button.png" alt="" />
+</p>
+
+<p>Drag two <strong>Round Rect</strong> <strong>Button</strong> and align them at the center. Change the type of the buttons to <strong>Custom;</strong> set the background image to <strong>blue </strong>and <strong>green</strong> respectively. Change the <strong>Text Color</strong><strong> </strong>to <strong>White</strong> and name the buttons: <strong>Bank A/C</strong> and <strong>Gmail ID.</strong> This is illustrated below.</p>
+
+<p><img src="images/26-img-005.png" alt="" />
+  </p>
+
+<p>One final thing to do here, is to map this view controller to a <strong>UIViewController</strong> class. Create a new class that extends from <strong>UIViewController </strong>and name it <strong>SimplePimViewController</strong>. In the storyboard, select the above view controller and in the <strong>custom class</strong> section of <strong>identity inspector</strong> on the right, give the name <strong>CSimpleViewController. </strong>This is illustrated below:</p>
+
+<p><img src="images/26-img-008.png" alt="" />
+</p>
+
+<h2 id="toc_3">Wiring the code for the Buttons</h2>
+
+<p>The idea is this: When we click a button, <strong>a table view</strong> should show up listing all the information. We will save all the information in a <strong>PLIST</strong> files. The files will reside inside the application. This approach is not safe for storing sensitive information but for the purpose of this tutorial, it should be okay. So when a button is clicked, the table view controller will load the corresponding <strong>PLIST</strong> file. </p>
+
+<p>Create two <strong>PLIST</strong> files named: <strong>netbank.plist</strong> and <strong>gmail.plist</strong> with the following contents:</p>
+
+<p><img src="images/26-img-006.png" alt="" />
+</p>
+
+<p><img src="images/26-img-007.png" alt="" />
+</p>
+
+<p>Now let&rsquo;s create a table view controller by dragging it from the right. After that, create a new Objective-C class called <strong>PListTableViewController</strong> and make sure it&rsquo;s base class is <strong>UITableViewController</strong>. We will map the newly dragged table view controller to this class. Similar to what we&rsquo;ve done above, in the** custom class** section of <strong>identity inspector</strong> on the right, put the name <strong>CPListTableViewController. </strong>The following is the description of what the two classes are supposed to do.</p>
+
+<p>CSimplePimViewControllerHandles the button touched eventsCPListTableViewControllerLoads the data from the PLIST files and displays in table view
+In <strong>CSimplePimViewController</strong> we create the two methods as shown below.</p>
+
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface CSimplePimViewControllerViewController : UIViewController
+
+-(IBAction)onBankAcClicked:(id)sender;
+-(IBAction)onGmailIdClicked:(id)sender;
+
+@end
+
+The initial implementation method looks something like this:
+
+
+- (IBAction)onBankAcClicked:(id)sender {
+    CPListTableViewController *cPimController = [CPListTableViewController new];
+    [cPimController setTitle:@&quot;Bank A/C&quot;];
+    [self.navigationController pushViewController:cPimController animated:true];
+}
+
+- (IBAction)onGmailIdClicked:(id)sender {
+    CPListTableViewController *cPimController = [CPListTableViewController new];
+    [cPimController setTitle:@&quot;Gmail ID&quot;];
+    [self.navigationController pushViewController:cPimController animated:true];
+}
+</code></pre>
+
+<p>The code just instantiates a new object of CPListTableViewController and pushes it to the <strong>navigation controller</strong>.</p>
+
+<p>One last important thing remaining now is to map the buttons to the <strong>IBAction</strong> in the code. Right click on each button, drag it and map it to the corresponding IBActon as illustrated below. Do the same for each of the buttons.</p>
+
+<p><img src="images/26-img-009.png" alt="" />
+ <img src="images/26-img-010.png" alt="" />
+</p>
+
+<h2 id="toc_4">Testing what we have so far</h2>
+
+<p>If you&rsquo;ve followed all the steps so far, the output you have should resemble what i have in the following video.</p>
+
+<h2 id="toc_5">Logic Time - Writing the code for CPListTableViewController</h2>
+
+<p>By now, we have the structure and wiring for our application. All we need is the code that loads up the PLIST file and displays it. Firstly, the interface file looks like this:</p>
+
+<pre><code>  @interface CPListTableViewController : UITableViewController
+
+  //we init this class via this method. In the input, we provide the PLIST filename without
+  //the extension
+  - (id) initWithDataFile:(NSString*)dataFile;
+
+  @end
+
+  NSDictionary *contentsMap; //the contents of the PLIST file is stored as a map with key/value pairs
+  NSString *dataFile; //reference to the filename
+
+  NSArray *sections; //all the keys in the PLIST files are treated as sections in the table view controller
+</code></pre>
+
+<p>The implementation is a bit long, so we&rsquo;ll go through them one by one. First of all, we&rsquo;ll write the code for <strong>initWithDataFile</strong> method</p>
+
+<pre><code>- (id) initWithDataFile:(NSString*)_dataFile {
+    self = [super init];
+    if (self == nil)
+        return nil;
+
+    dataFile = _dataFile;
+
+    NSString *dataPath = [[NSBundle mainBundle] pathForResource:dataFile ofType:@&quot;plist&quot;];
+    contentsMap = [[NSDictionary alloc] initWithContentsOfFile:dataPath];
+        sections = [[NSArray alloc] initWithArray:[contentsMap allKeys]];
+
+    return self;
+}
+</code></pre>
+
+<p>What we did here was to create an internal path for PLIST file. Then, create a <strong>NSDictionary</strong> using the method <strong>initWithContentsOfFile </strong>which holds all the data from the PLIST file. Finally, we create an array called <strong>sections</strong> in which we put all the keys of the PLIST file. The reason why we&rsquo;re storing all the keys is because we want to use each of the keys as section header in our table view. Next, we write code that display data for the table view.</p>
+
+<pre><code>#pragma mark Table
+
+// Each KEY in the PLIST file is a Section Header
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [sections objectAtIndex:section];
+}
+
+// Customize the number of sections in the table view.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [sections count];
+}
+
+// Customize the number of rows in a section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // no. of rows and no. of sections are the same
+    return 1;
+}
+
+//Code for each cell row
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+     NSString *cellId = @&quot;Cell&quot;;
+
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+     if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+     }
+
+    NSString *key = [sections objectAtIndex:indexPath.section];
+    NSString *value = [contentsMap valueForKey:key];
+
+    cell.textLabel.font = [UIFont fontWithName:@&quot;Helvetica&quot; size:13.0f];
+
+    //Check if this row is a password field
+    bool isPassword = [key isEqualToString:@&quot;Password&quot;];
+    bool isPin = [key rangeOfString:@&quot;pin&quot; options:NSCaseInsensitiveSearch].location != NSNotFound;
+
+    if (isPassword || isPin) {
+        cell.textLabel.text = @&quot;**********&quot;; //hide the cell text from plain view
+        cell.userInteractionEnabled = YES;
+    } else {
+        cell.textLabel.text = value;
+        cell.userInteractionEnabled = NO;
+    }
+
+    return cell;
+}
+
+//Selection for cell row
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *key = [sections objectAtIndex:indexPath.section];
+    NSString *value = [contentsMap valueForKey:key];
+
+    //
+    UIAlertView *alertView = [[UIAlertView alloc]
+                              initWithTitle:@&quot;Password&quot;
+                              message:value
+                              delegate:nil
+                              cancelButtonTitle:@&quot;OK&quot;
+                              otherButtonTitles:nil,
+                              nil];
+    [alertView show];
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+</code></pre>
+
+<h2 id="toc_6">Finalizing bits &amp; pieces</h2>
+
+<p>By now, we have application structure i.e. navigation controller, UI design i.e. two buttons, the PLIST display controller and the logic for wiring all of them up. One final thing to do here is to go back and change some of the codes in CSimplePimViewController. When a button is clicked, for ex: Bank A/C, the corresponding PLIST file should be loaded and displayed. The logic for this is already written in <strong>initWithDataFile</strong> method. Therefore, all we have to do is call the method.</p>
+
+<pre><code>- (IBAction)onBankAcClicked:(id)sender {
+    CPListTableViewController *cPimController = [[CPListTableViewController new] initWithDataFile:@&quot;netbank&quot;];
+    [cPimController setTitle:@&quot;Bank A/C&quot;];
+    [self.navigationController pushViewController:cPimController animated:true];
+}
+
+- (IBAction)onGmailIdClicked:(id)sender {
+    CPListTableViewController *cPimController = [[CPListTableViewController new] initWithDataFile:@&quot;gmail&quot;];
+    [cPimController setTitle:@&quot;Gmail ID&quot;];
+    [self.navigationController pushViewController:cPimController animated:true];
+}
+</code></pre>
+
+<p>That&rsquo;s it for this tutorial. Thank you for your time.</p>
+
+        </section>
+    </div>
+  </div>
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+
+<div class="container">
+  <hr />
+  <hr />
+  
+    <span class="left">
+    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/sloot-editor">Sloot Editor</a>
+    </span>
+  
+
+  
+    <span class="right">
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/setting-up-jadclipse-and-jad-java-decompiler-in-eclipse"> &nbsp; Setting Up JadClipse and JAD Decompiler in Eclipse</a> &raquo;
+    </span>
+  
+</div>
+
+  <br />
+  
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/tutorials">Tutorials</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/ios">IOS</a> </li>
+    
+  </ul>
+</div>
+
+
+
+  
+  
+
+<div class="container content">
+<footer>
+  <div>
+    <p class="right credit">
+    Fancy footer here. Link to <a href="http://hemantasapkota.github.io/">Home Page</a>
+    </p>
+  </div>
+</footer>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
+
+
+

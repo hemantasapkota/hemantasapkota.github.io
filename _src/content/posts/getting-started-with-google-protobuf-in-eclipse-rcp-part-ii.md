@@ -24,11 +24,9 @@ Before starting with this tutorial, you should ensure that you have WindowBuilde
 
 This section is going to be a bit lengthy and advanced. Here, we create an Eclipse RCP application that has the following features:
 
-
-
- 1. Custom perspective
- 2. A Common Navigator View
- 3. A Form Editor for managing addresses i.e. An Address Book
+ * Custom perspective
+ * A Common Navigator View
+ * A Form Editor for managing addresses i.e. An Address Book
 
 
 In the project/package explorer right click and create a new **Plug-in Project** named **contacts-manager**. Continue pressing the **next** button until you reach the **Templates **page. Select **Hello RCP** template and press the **Finish **button. This will result in the **manifest** editor for the project to open automatically as shown in the image below. 
@@ -37,7 +35,7 @@ In the project/package explorer right click and create a new **Plug-in Project**
 ![][6]
 
 
- In the top right of the image, I've annotated the **Run** button. If you press the **Run **button, you should see an empty application window with the title **Hello RCP. **Next, We will add the **Eclipse Common Navigator view** in the application. [Eclipse Common Navigator Framework][7]  allows you to create and manage projects/files in the workspace of your RCP application.
+In the top right of the image, I've annotated the **Run** button. If you press the **Run **button, you should see an empty application window with the title **Hello RCP. **Next, We will add the **Eclipse Common Navigator view** in the application. [Eclipse Common Navigator Framework][7]  allows you to create and manage projects/files in the workspace of your RCP application.
 
 
 In the **Manifest editor,** click on the **Extensions **tab and **Add** the **org.eclipse.ui.navigator.viewer **as shown in the images below. Essentially, we are adding a view to our RCP. Therefore, the view id is important to note. The view id that I set is **contacts_manager.comnav. **We will use this view id later**.**
@@ -46,21 +44,22 @@ In the **Manifest editor,** click on the **Extensions **tab and **Add** the 
 **![][8] ![][9] **
 
 
-** **Now, we need to write some codes to make the CNF show up properly in the RCP application. Open up **ApplicationWorkbenchAdvisor.java** and add the following two methods to it:****
+** **Now, we need to write some codes to make the CNF show up properly in the RCP application. Open up **ApplicationWorkbenchAdvisor.java** and add the following two methods to it:
 
-
-    @Override
+```
+@Override
   public void initialize(IWorkbenchConfigurer configurer) {
     super.initialize(configurer);
-    IDE.registerAdapters(); // IDE is declared in org.eclipse.ui.ide so make sure to add the package to dependencies of the RCP
+    IDE.registerAdapters();
   }
 
-//With this method, we set the root of our workspace as default input.
 @Override
 public IAdaptable getDefaultPageInput() {
 	 IWorkspace workspace = ResourcesPlugin.getWorkspace();
 	 return workspace.getRoot();
 }
+```
+
 Next, open up **Perspective.java **and add the following code to **createInitialLayout** method.
 
 
@@ -85,7 +84,7 @@ In the **Dependencies** tab of **manifest editor,** add **org.eclipse.ui.for
 The template creates two files: **ContactEditor.java **and **ContactEditorContributor.java**. Because we're creating an editor for managing simple contacts, we'll remove all the template code and start with our own. Remove all the template code from **ContactEditor.java** and use the following code as the starting point. You might as well delete **ContactEditorContributor.java** because we won't be using it. If you do so, don't forget to remove the corresponding reference to it in the manifest file.
 
 
-
+```
 public class ContactEditor extends FormEditor {
 
 	@Override
@@ -106,6 +105,7 @@ public class ContactEditor extends FormEditor {
 	}
 
 }
+```
 A **Form editor** is a collection of form pages. We'll create a form page using **Window Builder**. As shown in the images below, create a new form page called **ContactFormPage.java.**
 
 
@@ -120,45 +120,44 @@ Using the **Window Builder**, we will create a simple form like below:
 
 The following are the variable names for the text fields:** txtFirstName, txtMiddleName, txtLastName, txtMobile, ****txtHomepage, **and **btnSave. **We need to add this form page in the **ContactEditor.java** file. Update the **ContactEditor.java** file as below:
 
+```
+  public class ContactEditor extends FormEditor {
 
-    public class ContactEditor extends FormEditor {
+  	ContactFormPage cfp;
 
-    	ContactFormPage cfp;
+  	@Override
+  	protected void addPages() {
+  		try {
+  			cfp = new ContactFormPage(this, "ContactFormPage", "Contacts");
 
-    	@Override
-    	protected void addPages() {
-    		try {
-    			cfp = new ContactFormPage(this, "ContactFormPage", "Contacts");
+  			addPage(cfp);
+  		} catch (PartInitException e) {
+  			e.printStackTrace();
+  		}
+  	}
 
-    			addPage(cfp);
-    		} catch (PartInitException e) {
-    			e.printStackTrace();
-    		}
-    	}
+  	@Override
+  	protected void setInput(IEditorInput input) {
+  		super.setInput(input);
 
-    	@Override
-    	protected void setInput(IEditorInput input) {
-    		super.setInput(input);
+  		setPartName("Simple Contact Editor");
+  	}
 
-    		setPartName("Simple Contact Editor");
-    	}
+  	@Override
+  	public void doSave(IProgressMonitor monitor) {
+  	}
 
-    	@Override
-    	public void doSave(IProgressMonitor monitor) {
-    	}
+  	@Override
+  	public void doSaveAs() {
+  	}
 
-    	@Override
-    	public void doSaveAs() {
-    	}
+  	@Override
+  	public boolean isSaveAsAllowed() {
+  		return false;
+  	}
 
-    	@Override
-    	public boolean isSaveAsAllowed() {
-    		return false;
-    	}
-
-    }
-
-
+  }
+```
 
 ## Testing what we have so far ##
 
@@ -169,18 +168,13 @@ In the last section we covered a lot of information related to creating a RCP ap
 ![][16]
 
 
- 
-
-
 Click on the **Finish **button. You should now have the form editor open the contact file automatically as shown in the image below.
 
 
-![][17]  ** **
+![][17] 
 
 
-****That's it for this part. In the [next and final part][18] , we will focus on how to persist the data for the **.contact **file using Google Protobuf.
-
-
+That's it for this part. In the [next and final part][18] , we will focus on how to persist the data for the **.contact **file using Google Protobuf.
 
 
   [1]: http://download.eclipse.org/windowbuilder/WB/release/R201206261200/4.2/

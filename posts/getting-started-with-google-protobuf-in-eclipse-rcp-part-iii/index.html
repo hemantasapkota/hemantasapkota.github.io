@@ -68,7 +68,7 @@
 
 <p>The contents of the proto file is below. The message itself is very simple. That&rsquo;s because, our tutorial is very simple. </p>
 
-<p>package contactsmanager.proto; //The package where the compiled version of this object is saved
+<pre><code>package contactsmanager.proto; //The package where the compiled version of this object is saved
 // The name of the message. It is important not to give the same name as the proto file name// i.e. the message name Contact would not compile. This issue can be avoided by using the java_outer_classname option
 message PContact {        //the optional keyword indicates that the field may or may not be set. When parsing this message, if optional value is not set, then default value is used
     optional string firstName = 1;
@@ -77,7 +77,9 @@ message PContact {        //the optional keyword indicates that the field may or
     optional string mobile = 4;
     optional string homepage = 5;
 }
-Once you save the .proto file, the protobuf compiler compiles it automatically and creates the corresponding java file for reading/writing to the message in you project folder. The folder it creates it: <em>src-gen *You need to link up this folder as source folder so that when we use the PContact.java file, eclipse can include it automatically in the imports. Right click on the </em><em>contacts-manager</em>* project that we are working on and link up the <em>src-gen</em> folder in <strong>java build path.</strong> This is illustrated below.</p>
+</code></pre>
+
+<p>Once you save the .proto file, the protobuf compiler compiles it automatically and creates the corresponding java file for reading/writing to the message in you project folder. The folder it creates it: <em>src-gen *You need to link up this folder as source folder so that when we use the PContact.java file, eclipse can include it automatically in the imports. Right click on the </em><em>contacts-manager</em>* project that we are working on and link up the <em>src-gen</em> folder in <strong>java build path.</strong> This is illustrated below.</p>
 
 <p><img src="images/27-img-002.png" alt="" />
 </p>
@@ -91,36 +93,36 @@ Once you save the .proto file, the protobuf compiler compiles it automatically a
 
 <p>Next, open up <strong>ContactFormPage.java</strong> in <strong>Window Builder </strong>moder.<strong> </strong>Double click on the <strong>save</strong> button. The builder automatically creates a click handler and switches to code mode. In the code create a new method called <em>performSave()</em><em>.</em>**<strong> </strong>Also, call the method *performSave() *inside the button event handler.</p>
 
-<p>private void performSave() {
+<pre><code>private void performSave() {
     String firstName = txtFirstName.getText().trim();
     String middleName = txtMiddleName.getText().trim();
     String lastName = txtLastName.getText().trim();
     String mobile = txtMobile.getText().trim();
-    String homepage = txtHomePage.getText().trim();</p>
+    String homepage = txtHomePage.getText().trim();
 
-<pre><code>     //the compiled java class has in-built builder for creating objects of the PContact class
-    PContact contact = PContact.newBuilder().setFirstName(firstName)
-            .setMiddleName(middleName).setLastName(lastName)
-            .setMobile(mobile).setHomepage(homepage).build();
+         //the compiled java class has in-built builder for creating objects of the PContact class
+        PContact contact = PContact.newBuilder().setFirstName(firstName)
+                .setMiddleName(middleName).setLastName(lastName)
+                .setMobile(mobile).setHomepage(homepage).build();
 
-    //save the contents of contact (byte array) to file using eclipse resources api
-IFile file = ((FileEditorInput) getEditorInput()).getFile();
-ByteArrayInputStream baio = new ByteArrayInputStream(contact.toByteArray());
-try {
-    file.setContents(baio, false, false, null);
-} catch (CoreException e) {
-    e.printStackTrace();
+        //save the contents of contact (byte array) to file using eclipse resources api
+    IFile file = ((FileEditorInput) getEditorInput()).getFile();
+    ByteArrayInputStream baio = new ByteArrayInputStream(contact.toByteArray());
+    try {
+        file.setContents(baio, false, false, null);
+    } catch (CoreException e) {
+        e.printStackTrace();
+    }
 }
 </code></pre>
 
-<p>}
-Now, we&rsquo;ll create another method that loads the data from the file. Create <em>loadContact() *and call the method inside </em><em>createFormContent()</em>* method.</p>
+<p>Now, we&rsquo;ll create another method that loads the data from the file. Create <em>loadContact() *and call the method inside </em><em>createFormContent()</em>* method.</p>
 
-<p>@Override
+<pre><code>@Override
 protected void createFormContent(IManagedForm managedForm) {
     FormToolkit toolkit = managedForm.getToolkit();
     ScrolledForm form = managedForm.getForm();
-    form.setText(&ldquo;Simple Contact Manager&rdquo;);
+    form.setText(&quot;Simple Contact Manager&quot;);
     Composite body = form.getBody();
     toolkit.decorateFormHeading(form.getForm());
     toolkit.paintBordersFor(body);
@@ -128,28 +130,27 @@ protected void createFormContent(IManagedForm managedForm) {
         .
         .
         loadContact();
-}</p>
+}
 
-<p>private void loadContact() {
+private void loadContact() {
     IFile file = ((FileEditorInput) getEditorInput()).getFile();
     try {
-        PContact contact = PContact.parseFrom(file.getContents());</p>
+        PContact contact = PContact.parseFrom(file.getContents());
 
-<pre><code>    txtFirstName.setText(contact.getFirstName());
-    txtMiddleName.setText(contact.getMiddleName());
-    txtLastName.setText(contact.getLastName());
+        txtFirstName.setText(contact.getFirstName());
+        txtMiddleName.setText(contact.getMiddleName());
+        txtLastName.setText(contact.getLastName());
 
-    txtMobile.setText(contact.getMobile());
-    txtHomePage.setText(contact.getHomepage());
+        txtMobile.setText(contact.getMobile());
+        txtHomePage.setText(contact.getHomepage());
 
-} catch (IOException e) {
-    e.printStackTrace();
-} catch (CoreException e) {
-    e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (CoreException e) {
+        e.printStackTrace();
+    }
 }
 </code></pre>
-
-<p>}</p>
 
 <h2 id="toc_2">Output</h2>
 
@@ -172,7 +173,7 @@ protected void createFormContent(IManagedForm managedForm) {
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/getting-started-with-google-protobuf-in-eclipse"> &nbsp; Getting Started with Google Protobuf - 1</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/j2objc-eclipse-plugin"> &nbsp; J2ObjC Eclipse Plugin</a> &raquo;
     </span>
   
 </div>
