@@ -5,7 +5,7 @@ date: "2014-04-21"
 categories:
     - "OpenFrameworks"
     - "Gaming"
-    - "Eclipse Plugin"
+    - "Eclipse"
     - "Java"
     - "Projects"
 ---

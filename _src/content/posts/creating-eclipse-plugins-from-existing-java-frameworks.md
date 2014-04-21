@@ -3,8 +3,7 @@ title: "Creating Eclipse Plugins From Existing Java Frameworks"
 description: "Creating plugins from existing frameworks is the first step to integrating them in your own Eclipse plugins and RCP clients. In this article we'll look at creating eclipse plugin for the popular library LibGDX"
 date: "2012-12-04"
 categories:
-    - "Eclipse Plugins"
-    - "Eclipse RCP"
+    - "Eclipse"
     - "Java"
 ---
 <p> Step 1: Download the latest LibGDX from <a href="http://libgdx.badlogicgames.com/download.html" target="_self">http://libgdx.badlogicgames.com/download.html</a></p>
