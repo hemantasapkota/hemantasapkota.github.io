@@ -6,5 +6,4 @@ categories:
     - "Box2D"
     - "Eclipse"
     - "Java"
-    - "Projects"
 ---
