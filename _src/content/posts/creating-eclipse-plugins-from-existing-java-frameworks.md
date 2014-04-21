@@ -6,13 +6,42 @@ categories:
     - "Eclipse"
     - "Java"
 ---
-<p> Step 1: Download the latest LibGDX from <a href="http://libgdx.badlogicgames.com/download.html" target="_self">http://libgdx.badlogicgames.com/download.html</a></p>
-<p>Step 2: In Eclipse, create a new plugin project</p>
-<p><img src="images/img001.png" alt="" /></p>
-<p>Step 3: Next, you'll have to provide links to the JAR archives of LibGDX</p>
-<p><img src="../images/img003.png" alt="" /></p>
-<p>Step 4: In the next step, fill in some parameters like plugin name and version number</p>
-<p><img src="../images/img002.png" alt="" /> </p>
-<p> After having gone through all the steps, you should be able to see the LibGDX eclipse plugin in your package explorer.</p>
-<p><img src="../images/img004.png" alt="" /></p>
-<p> </p>
+
+### Step 1: Download the latest LibGDX from [http://libgdx.badlogicgames.com/download.html][2]
+
+
+### Step 2: In Eclipse, create a new plugin project
+
+
+![][3]
+
+
+### Step 3: Next, you'll have to provide links to the JAR archives of LibGDX
+
+
+![][4]
+
+
+### Step 4: In the next step, fill in some parameters like plugin name and version number
+
+
+![][5]  
+
+
+ After having gone through all the steps, you should be able to see the LibGDX eclipse plugin in your package explorer.
+
+
+![][6]
+
+
+ 
+
+
+
+
+  [1]: http://libgdx.badlogicgames.com/
+  [2]: http://libgdx.badlogicgames.com/download.html
+  [3]: images/img001.png
+  [4]: images/img003.png
+  [5]: images/img002.png
+  [6]: images/img004.png
