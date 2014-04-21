@@ -1,12 +1,12 @@
 ---
 title: "Setting Up JadClipse and JAD Decompiler in Eclipse"
-description: ""
-date: "2014-04-21"
+description: "JadClipse and JAD Decompiler are useful utils for viewing sources for .class files. Here are the steps required for setting then up in Eclipse."
+date: "2012-12-06"
 categories:
     - "Eclipse"
     - "Java"
 ---
-1. Download JAD decompiler from here [downloads/jad158g.mac.intel.zip ][1] and unzip it somewhere in your system
+1. Download JAD decompiler from here [jad158g.mac.intel.zip ][1] and unzip it somewhere in your system
 
 2. Download JadClipse - the Eclipse plugin for JAD from here [http://jadclipse.sourceforge.net/wiki/index.php/Main_Page#Download][2]
 
