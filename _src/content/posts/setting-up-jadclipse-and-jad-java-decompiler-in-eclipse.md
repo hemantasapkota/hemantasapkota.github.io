@@ -3,11 +3,10 @@ title: "Setting Up JadClipse and JAD Decompiler in Eclipse"
 description: ""
 date: "2014-04-21"
 categories:
-    - "Box2D"
     - "Eclipse"
     - "Java"
 ---
-1. Download JAD decompiler from here [http://hsapkota.com.au/downloads/jad158g.mac.intel.zip ][1] and unzip it somewhere in your system
+1. Download JAD decompiler from here [downloads/jad158g.mac.intel.zip ][1] and unzip it somewhere in your system
 
 2. Download JadClipse - the Eclipse plugin for JAD from here [http://jadclipse.sourceforge.net/wiki/index.php/Main_Page#Download][2]
 
