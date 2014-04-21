@@ -9,6 +9,8 @@ categories:
 
 Simple Personal Information Manager (PIM) is a basic app for iphone/ipod touch for managing personal information like email a/c, registration numbers, bank a/c. This is a one-stop app for conveniently looking up personal info when needed. Before we begin the tutorial, let's check out the output of this tutorial. The video shows what we intend to create during this tutorial.
 
+{{% youtube 8LdYlPQ1ZJM %}}
+
 
 ## Creating the project ##
 
@@ -119,8 +121,7 @@ One last important thing remaining now is to map the buttons to the **IBAction*
 
 If you've followed all the steps so far, the output you have should resemble what i have in the following video.
 
-
-
+{{% youtube tl_Lc0w0A38 %}}
 
 
 ## Logic Time - Writing the code for CPListTableViewController ##

@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with Google Protobuf - 2"
 description: "Google Protobuf is a great framework for serializing and deserializing data for your applications. In this series of article, we'll look into setting up Google Protobuf as an Eclipse Plugin and later integrate protobuf in your RCP applications."
-date: "2012-12-06"
+date: "2012-12-07"
 categories:
     - "Google Protobuf"
     - "Eclipse"

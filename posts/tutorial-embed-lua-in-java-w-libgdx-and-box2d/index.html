@@ -1,0 +1,418 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="http://hemantasapkota.github.io/">
+    <title> Tutorial - Embed Lua in Java w/LibGDX and Box2D </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/tutorial-embed-lua-in-java-w-libgdx-and-box2d">
+    
+
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/syntax.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/lanyon.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/">Home</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/posts">Blog</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/categories/projects">Projects</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014 Hemanta Sapkota. Powered by <a href="http://hugo.spf13.com">Hugo</a>. Design adapted from <a href="http://lanyon.getpoole.com">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="http://hemantasapkota.github.io/posts" title="Blog">Blog Posts</a>
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">Tutorial - Embed Lua in Java w/LibGDX and Box2D</h1>
+        <section id="main">
+          <h5 id="date"> Tue Jan 15, 2013 </h5>
+          
+
+<h2 id="toc_0">Video Demonstration</h2>
+
+<p>Before moving forward, Let&rsquo;s have a look at what we&rsquo;re creating. It&rsquo;s a LibGDX Box2D project that has one physics object. Using an external Lua script we control the physics object. More specifically, we use the cursor keys to control the camera and the &ldquo;A&rdquo; key to set the speed of the revolute joint.</p>
+
+<div class="embed video-player">
+<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/deWXnyczYBY" allowfullscreen frameborder="0">
+</iframe>
+</div>
+
+<h2 id="toc_1">Downloading the Libraries</h2>
+
+<p>LibGDX - <a href="https://code.google.com/p/libgdx/downloads/list">https://code.google.com/p/libgdx/downloads/list</a> LuaJ - <a href="http://sourceforge.net/projects/luaj/files/latest/download">http://sourceforge.net/projects/luaj/files/latest/download</a></p>
+
+<h2 id="toc_2">Setting up the Project</h2>
+
+<p>Create a new project in Eclipse called <strong>Embed-Lua-Java-Box2D</strong>. Alternatively, you can just fork the source from github. Add the following libraries to the project:</p>
+
+<ul>
+<li>gdx-backend-lwjgl-natives.jar</li>
+<li>gdx-backend-lwjgl.jar</li>
+<li>gdx-natives.jar</li>
+<li>gdx.jar</li>
+<li>luaj-jse-3.0-alpha2.jar</li>
+</ul>
+
+<h2 id="toc_3">Structure</h2>
+
+<p>We&rsquo;re creating a LibGDX project. I&rsquo;m being cautious as to not refer this a game, as it is not. In LibGDX project, we&rsquo;ll create a Box2D world and put some physics objects. We&rsquo;ll use an external Lua script that&rsquo;ll control some aspects of the physics object.</p>
+
+<h2 id="toc_4">Setting up Box2D </h2>
+
+<p>Have a look at MyGdxGame.java. I&rsquo;ll highlight some important portion of the code.</p>
+
+<pre><code>@Override
+public void create() {
+    Vector2 gravity = new Vector2(0, -9);
+    world = new World(gravity, true);
+    debugDraw = new Box2DDebugRenderer();
+
+    float w = Gdx.graphics.getWidth();
+    float h = Gdx.graphics.getHeight();
+
+    cam = new OrthographicCamera(w / 10, h / 10);
+    cam.position.set(cam.viewportWidth / 2, cam.viewportHeight / 2, 0);
+
+    scriptManager = new LuaScriptManager(
+            world,
+            cam,
+            &quot;scripts/tumbler.lua&quot;);
+
+    createBodies();
+
+    scriptManager.executeInit();
+}
+
+private void createBodies() {
+  {
+      BodyDef bodyDef = new BodyDef();
+      ground = world.createBody(bodyDef);
+  }
+
+  {
+      BodyDef bodyDef = new BodyDef();
+      bodyDef.type = BodyType.DynamicBody;
+      bodyDef.allowSleep = true;
+      bodyDef.position.set(0.0f, 0.0f);
+      body = world.createBody(bodyDef);
+
+      PolygonShape shape = new PolygonShape();
+
+      shape.setAsBox(0.5f, 10.0f, new Vector2(5.0f, 0.0f), 0.0f);
+      body.createFixture(shape, 5.0f);
+
+      shape.setAsBox(0.5f, 10.0f, new Vector2(-5.0f, 0.0f), 0.0f);
+      body.createFixture(shape, 5.0f);
+
+      shape.setAsBox(10.0f, 0.5f, new Vector2(0.0f, 5.0f), 0.0f);
+      body.createFixture(shape, 5.0f);
+
+      shape.setAsBox(10.0f, 0.5f, new Vector2(0.0f, -5.0f), 0.0f);
+      body.createFixture(shape, 5.0f);
+
+      RevoluteJointDef rjd = new RevoluteJointDef();
+      rjd.bodyA = ground;
+      rjd.bodyB = body;
+      rjd.localAnchorA.set(0.0f, 10.0f);
+      rjd.localAnchorB.set(0.0f, 0.0f);
+      rjd.referenceAngle = 0.0f;
+      rjd.motorSpeed = 0.05f * MathUtils.PI;
+      rjd.maxMotorTorque = 1e8f;
+      rjd.enableMotor = true;
+      joint = world.createJoint(rjd);
+
+  }
+}
+
+@Override
+public void render() {
+    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
+    cam.update();
+    cam.apply(Gdx.graphics.getGL10());
+
+    debugDraw.render(world, cam.combined);
+    world.step(1 / 60f, 100, 100);
+
+    if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        scriptManager.executeKeyPressed(&quot;Right&quot;, body, joint);
+    } else if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+        scriptManager.executeKeyPressed(&quot;Left&quot;, body, joint);
+    } else if (Gdx.input.isKeyPressed(Keys.A)) {
+        scriptManager.executeKeyPressed(&quot;A&quot;, body, joint);
+    }
+}
+</code></pre>
+
+<p>Now, just to grab your attention on the subject matter, the following image shows the rendering of the above code.<img src="images/29-img-001.png" alt="" />
+</p>
+
+<h2 id="toc_5">Setting up Lua script manager</h2>
+
+<p>Firstly, we define the notion of our script. For the purposes of this tutorial, I&rsquo;ll define our script as block of code that has two functions in Lua:</p>
+
+<ul>
+<li><em><code>init(world, cam)</code></em> - Takes two parameters: Box2D World and the Orthographic Camera. We&rsquo;ll pass these parameters from Java to Lua.</li>
+<li><em><code>keyPressed(world, cam, body, joint, key)</code></em> - Parameters: Box2D World, Orthographic Camera, Box2D Body, Box2D Joint, Key Pressed.</li>
+</ul>
+
+<p>It is important to note that the signature of these functions are entirely up to you to define depending on your requirements. Later, we&rsquo;ll create an external script file with these functions. Now Let&rsquo;s move on to conceptualizing this notion of script in our project by creating an java interface called <strong><em>IScript</em></strong>.</p>
+
+<pre><code>/**
+ * The Interface IScript.
+ */
+public interface IScript {
+
+      /**
+     * Can execute.
+     *
+     * @return true, if successful
+     */
+    boolean canExecute();
+
+      /**
+     * Execute init. This method is called only once per each script.
+     */
+    void executeInit();
+
+      /**
+     * Execute key pressed.
+     *
+     * @param key the key
+     * @param body the body
+     * @param joint the joint
+     */
+    void executeKeyPressed(String key, Body body, Joint joint);
+}
+</code></pre>
+
+<p>We&rsquo;ll implement this interface in LuaScriptManager - the handler that is responsible for calling lua functions in our project. The implementation of LuaScriptManager looks like this:</p>
+
+<pre><code>public class LuaScriptManager implements IScript {
+
+    /** The globals. */
+    private Globals globals = JsePlatform.standardGlobals();
+
+    /** The chunk. */
+    private LuaValue chunk;
+
+    /** The script file exists. */
+    private boolean scriptFileExists;
+
+    /** The world. */
+    private World world;
+
+    /** The cam. */
+    private Camera cam;
+
+    /**
+     * Instantiates a new lua script manager.
+     *
+     * @param world the world
+     * @param cam the cam
+     * @param scriptFileName the script file name
+     */
+    public LuaScriptManager(World world, Camera cam, String scriptFileName) {
+        this.world = world;
+        this.cam = cam;
+
+        if (!Gdx.files.internal(scriptFileName).exists()) {
+            scriptFileExists = false;
+            return;
+        } else {
+            scriptFileExists = true;
+        }
+
+        chunk = globals.loadFile(scriptFileName);
+
+        // very important step. subsequent calls to script method do not work if the
+        // chunk
+        // is not called here
+        chunk.call();
+
+    }
+
+    /* (non-Javadoc)
+     * @see com.laex.IScript#canExecute()
+     */
+    @Override
+    public boolean canExecute() {
+        return scriptFileExists;
+    }
+
+    /* (non-Javadoc)
+     * @see com.laex.IScript#executeInit()
+     */
+    @Override
+    public void executeInit() {
+        if (!canExecute()) {
+            return;
+        }
+
+        //there must be a corresponding init method in the external lua script file
+        globals.get(&quot;init&quot;).invoke(
+                new LuaValue[] { CoerceJavaToLua.coerce(world),
+                        CoerceJavaToLua.coerce(cam) });
+    }
+
+    /* (non-Javadoc)
+     * @see com.laex.IScript#executeKeyPressed(java.lang.String, com.badlogic.gdx.physics.box2d.Body, com.badlogic.gdx.physics.box2d.Joint)
+     */
+    @Override
+    public void executeKeyPressed(String key, Body body, Joint joint) {
+        if (!canExecute()) {
+            return;
+        }
+
+        //there must be a corresponding keyPressed method in the external lua file
+        globals.get(&quot;keyPressed&quot;).invoke(
+                new LuaValue[] { CoerceJavaToLua.coerce(world),
+                        CoerceJavaToLua.coerce(cam),
+                        CoerceJavaToLua.coerce(body),
+                        CoerceJavaToLua.coerce(joint), LuaValue.valueOf(key) });
+    }
+}
+</code></pre>
+
+<p>There are some key things to note while calling Lua functions from Java:</p>
+
+<ol>
+<li>To properly pass the parameters from Java to Lua, there&rsquo;s an excellent method: <code>CoerceJavaToLua.coerce(object)</code></li>
+<li><code>globals.loadFile(scriptFileName)</code> loads the Lua script and stores it in a variable, say <em><code>chunk</code></em></li>
+<li>Once loaded, <em><code>chunk.call()</code></em> must be executed at least once</li>
+<li>Functions in Lua script can be obtained via. the <code>globals.get(functionName)</code> method</li>
+<li>Once obtained, functions can be called by using the <em><code>invoke()</code></em> method</li>
+</ol>
+
+<h2 id="toc_6">Lua Script</h2>
+
+<p>The contents of our Lua Script file looks like this:</p>
+
+<pre><code>function init(world, cam)//not doing anything here for now. Possible usage could be setting some configuration for world and camera
+end
+
+function keyPressed(world, cam, body, joint, key)    //translate the camera to right
+    if key == &quot;Right&quot; then
+        cam:translate(0.5, 0, 0)
+    end
+    //translate the camera to left
+    if key == &quot;Left&quot; then
+        cam:translate(-0.5, 0, 0)
+    end
+    //set motor speed to 1.
+    if key == &quot;A&quot; then
+        joint:setMotorSpeed(1)
+    end
+end
+</code></pre>
+
+<p>Remember, we&rsquo;re calling the init() and keyPressed() method from LuaScriptManager class.</p>
+
+<h2 id="toc_7">Conclusion</h2>
+
+<p>If you have any thoughts, you can put them on the comments below. Dont forget to check out the source at: <a href="https://github.com/hemantasapkota/Embed-Lua-Java-Box2D">https://github.com/hemantasapkota/Embed-Lua-Java-Box2D</a></p>
+
+        </section>
+    </div>
+  </div>
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+
+<div class="container">
+  <hr />
+  <hr />
+  
+    <span class="left">
+    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/tutorial-creating-gmail-facebook-like-menu-navigation-in-ios">Tutorial - Creating Gmail/Facebook like Menu Navigation in IOS</a>
+    </span>
+  
+
+  
+    <span class="right">
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/simple-personal-information-manager-pim-for-iphone"> &nbsp; Tutorial - Simple Personal Information Manager (PIM) for iPhone</a> &raquo;
+    </span>
+  
+</div>
+
+  <br />
+  
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/java">Java</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/lua">Lua</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/box2d">Box2D</a> </li>
+    
+  </ul>
+</div>
+
+
+
+  
+  
+
+<div class="container content">
+<footer>
+  <div>
+    <p class="right credit">
+    Fancy footer here. Link to <a href="http://hemantasapkota.github.io/">Home Page</a>
+    </p>
+  </div>
+</footer>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
+
+
+

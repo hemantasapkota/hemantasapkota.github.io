@@ -1,0 +1,374 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="http://hemantasapkota.github.io/">
+    <title> Tutorial - Creating Gmail/Facebook like Menu Navigation in IOS </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/tutorial-creating-gmail-facebook-like-menu-navigation-in-ios">
+    
+
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/syntax.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/lanyon.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/">Home</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/posts">Blog</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/categories/projects">Projects</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014 Hemanta Sapkota. Powered by <a href="http://hugo.spf13.com">Hugo</a>. Design adapted from <a href="http://lanyon.getpoole.com">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="http://hemantasapkota.github.io/posts" title="Blog">Blog Posts</a>
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">Tutorial - Creating Gmail/Facebook like Menu Navigation in IOS</h1>
+        <section id="main">
+          <h5 id="date"> Sun Jan 27, 2013 </h5>
+          
+
+<p>The following video shows the output of this tutorial.</p>
+
+<div class="embed video-player">
+<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/R-6IiymHyqk" allowfullscreen frameborder="0">
+</iframe>
+</div>
+
+<p>Create a new <strong>Single View Application</strong> with <strong>Storyboards </strong>and <strong>Automatic Reference Counting.</strong> I&rsquo;ve named the project <strong>TablessNavigationTemplate.</strong></p>
+
+<h2 id="toc_0">Designing the UI - Setting up Root View Controller</h2>
+
+<p>Drag and Drop a <strong>Navigation Controller </strong>onto the storyboard.<strong> </strong>When the navigation controller is dropped, Xcode automatically adds a <strong>UITableViewController</strong> as a <strong>Root View Controller. </strong>We&rsquo;re going to use this root view controller as it is and add a couple of static cells onto it.</p>
+
+<p>Select the root view controller and change the <strong>content</strong> type of the table to <strong>Static Cells. </strong></p>
+
+<p><img src="images/28-img-001.png" alt="" />
+</p>
+
+<p>Double click <strong>navigation bar</strong> and change the text to <strong>Inbox (268). </strong>Drag and drop two <strong>bar button items </strong>on to the navigation bar. One button on the left. One button on the right. Set <strong>|||</strong> as the text for the left button. For the button on the right, change its <strong>identifier </strong>to <strong>Search, </strong>from the inspector. The navigation bar should look something like this.</p>
+
+<p><img src="images/28-img-002.png" alt="" />
+</p>
+
+<p>Now we&rsquo;re going to create a couple of static cells. You can use your imagination here by dropping labels and button on it. The content of it is not very important. The static cells i designed look like this:</p>
+
+<p><img src="images/28-img-003.png" alt="" />
+</p>
+
+<p><strong> </strong>The navigation and root view controller should look like this:</p>
+
+<p><img src="images/28-img-004.png" alt="" />
+</p>
+
+<h2 id="toc_1">UI Design - Setting up App Navigation View</h2>
+
+<p>Next, we drag another <strong>View Controller</strong>. This view controller will be toggled on/off. The toggling is controlled by the ||| button on the navigation bar. Drag a <strong>Search </strong><strong>Bar </strong>and a <strong>Table View </strong>onto this view controller. From the Size inspector on the right, limit the width of both the search bar and the table view to <strong>250px.</strong> The following image should clarify this.</p>
+
+<p><img src="images/28-img-005.png" alt="" />
+</p>
+
+<p>Now assign the <strong>data source </strong>and <strong>delegate </strong>for the table view by right clicking on it and dragging the line at the bottom. The following image should clarify this.</p>
+
+<p><img src="images/28-img-006.png" alt="" />
+ <img src="images/28-img-007.png" alt="" />
+</p>
+
+<p>At this point, we create an Objective-C class corresponding to this view controller. We&rsquo;ll call this <strong>CNavViewController. </strong>In the <strong>Identity Inspector,</strong> we change the class type of the view controller to <strong>CNavViewController.</strong> We also set the <strong>Storyboard Id to </strong>&ldquo;<em>navigationView&rdquo;.</em></p>
+
+<p>*<img src="images/28-img-008.png" alt="" />
+ *</p>
+
+<p>The interface definition (CNavViewController.h) looks like this:</p>
+
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface CNavViewController : UIViewController&lt;UITableViewDataSource, UITableViewDelegate&gt;
+
+@property NSArray *navItems;            //contains the list of items to display in the table
+@property IBOutlet UITableView *navTableView; //the outlet for our table in the view controller.
+
+@end
+</code></pre>
+
+<p>Notice the IBOutlet navTableView. We need to link up this outlet in the view controller. At the bottom of our CNavViewController in Storyboard, you should see a panel of icons. From the first icon, right click and drag a line onto the view controller. Xcode lists up the outlet that we just created i.e. <strong>navTableView</strong>. We select the navTableView outlet. The following images should clarify this.</p>
+
+<p><img src="images/28-img-009.png" alt="" />
+ <img src="images/28-img-010.png" alt="" />
+</p>
+
+<p>In Summary, what we did was, to create a <strong>Navigation View Controller </strong>with a <strong>Table View Controller </strong> as its root view. We also created a custom <strong>View Controller</strong> that has a <strong>Search Bar </strong> and a <strong>UITableView. </strong>The final UI structure looks like this.</p>
+
+<p> <img src="images/28-img-011.png" alt="" />
+</p>
+
+<p>Before we go ahead in the next section to wire up the logic, for preparation, we need to give class names to each of the ui controllers above. We&rsquo;ve already done this for our custom view controller i.e. CNavViewController. Set the class names <strong>CNavigationViewController </strong>and <strong>CRootViewController </strong>respectively in the <strong>identity inspector、</strong>referencing the image above.</p>
+
+<h2 id="toc_2">Wiring the Classes and Logic - CNavViewController</h2>
+
+<p>Let&rsquo;s continue implementing CNavViewController. </p>
+
+<pre><code>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    navItems = [NSArray arrayWithObjects:@&quot;Inbox&quot;, @&quot;* Important and unread&quot;, @&quot;* Starred&quot;, @&quot;* Everything&quot;, @&quot;Sent Mail&quot;, @&quot;Drafts&quot;, @&quot;Spam&quot; ,nil];
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @&quot;&quot;;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return @&quot; &quot;;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return navItems.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @&quot;Cell&quot;;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+
+    // Configure the cell...
+    cell.textLabel.font = [UIFont fontWithName:@&quot;Sans Serif&quot; size:12];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+
+    cell.textLabel.text = [navItems objectAtIndex:indexPath.row];
+
+    return cell;
+}
+</code></pre>
+
+<p>The above piece of code is responsible for loading data in the table view. The data is stored in NSArray in the class. The following would be the output for the code.</p>
+
+<p><img src="images/29-img-012.png" alt="" />
+</p>
+
+<h2 id="toc_3">Wiring the Classes and Logic - CNavigationViewController</h2>
+
+<p>Create a class called CNavigationViewController which extends from UINavigationController. The purpose of this class is to manage the orientation for the app. To make matters simple for this tutorial, the app only supports <strong>Portrait </strong>orientation. We need to set that explicitly in the code.</p>
+
+<pre><code>- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait;
+}
+</code></pre>
+
+<h2 id="toc_4">Wiring the Classes and Logic - CRootViewController</h2>
+
+<p>Create a class called CRootViewController which extends from UITableViewController. The CRootViewController is the meat of the app. It contains the logic to animate the navigation controller and vice versa. So I&rsquo;ll go through it in detail. The interface definition file (CRootViewController.h) looks like this:</p>
+
+<pre><code>#import &lt;UIKit/UIKit.h&gt;;
+
+@interface CRootViewController : UITableViewController
+
+@property (strong) UIViewController *viewC;
+ (IBAction)showNavigation:(id)sender;
+
+@end
+</code></pre>
+
+<p>The implementation (CRootViewController.m) looks like this:</p>
+
+<pre><code>#import &quot;CRootViewController.h&quot;
+
+@interface CRootViewController ()
+
+@end
+
+@class CNavViewController;
+
+@implementation CRootViewController
+
+@synthesize viewC;
+
+    enum TranslateDirection {
+        LEFT, RIGHT
+    };
+
+    const float TRANSLATE_CONST = 250;
+    float translateX = TRANSLATE_CONST;
+    enum TranslateDirection td = RIGHT;
+
+- (IBAction)showNavigation:(id)sender {
+
+    [UIView animateWithDuration:0.5f
+
+            delay:0.0
+
+            options:UIViewAnimationCurveLinear
+
+            animations:^{
+                if (td == LEFT) {
+                    translateX = 0;
+                } else if (td == RIGHT) {
+                    translateX = TRANSLATE_CONST;
+                }
+
+                CGAffineTransform trans = CGAffineTransformMakeTranslation(translateX, 0);
+
+                self.navigationController.view.transform = trans;
+
+            }
+
+            completion:^(BOOL finished){
+
+                if (td == LEFT) {
+                    td = RIGHT;
+                } else if (td == RIGHT) {
+                    td = LEFT;
+                }
+
+            }
+     ];
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+
+    viewC = [self.storyboard instantiateViewControllerWithIdentifier:@&quot;navigationView&quot;];
+    [self.navigationController.view.window insertSubview:viewC.view atIndex:0];
+
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+@end
+</code></pre>
+
+<p>In the <strong>showNavigation</strong> method, we&rsquo;re using IOS Blocks to slide our navigation controller to the right. For this we construct an affine transformation that transforms the navigation controller by 250px to the right. We do a little plumbing to toggle the direction of translation i.e. right to left or left to right. </p>
+
+<p>In the <strong>viewDidLoad </strong>method, we instantiate a view controller that has the storyboard id &ldquo;<em>navigationView&rdquo;. *This is the </em><em>CNavViewController</em>* view. And the most important thing is, we place this view controller at index 0 inside the app window. This means, this view resides just below the <strong>navigation controller </strong>which in turn means, when the navigation controller is translated to the right, the <strong>CNavViewController</strong> residing at the bottom shows up.</p>
+
+<p>In the final step, we link up the <strong>showNavigation </strong>outlet method to the ||| button on the top left corner of the navigation bar. To do this, right click on the button and drag it below to the first icon on the panel and select the outlet: <strong><em>showNavigation</em></strong><strong>.</strong></p>
+
+<p>That&rsquo;s it for the tutorial. Thank you for your time.</p>
+
+<h2 id="toc_5">Source Code </h2>
+
+<p>The full source code to this tutorial is at <a href="https://github.com/hemantasapkota/TablessNavigationTemplate">https://github.com/hemantasapkota/TablessNavigationTemplate</a></p>
+
+        </section>
+    </div>
+  </div>
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+
+<div class="container">
+  <hr />
+  <hr />
+  
+    <span class="left">
+    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/j2objc-eclipse-plugin">J2ObjC Eclipse Plugin</a>
+    </span>
+  
+
+  
+    <span class="right">
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/tutorial-embed-lua-in-java-w-libgdx-and-box2d"> &nbsp; Tutorial - Embed Lua in Java w/LibGDX and Box2D</a> &raquo;
+    </span>
+  
+</div>
+
+  <br />
+  
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/tutorials">Tutorials</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/ios">IOS</a> </li>
+    
+  </ul>
+</div>
+
+
+
+  
+  
+
+<div class="container content">
+<footer>
+  <div>
+    <p class="right credit">
+    Fancy footer here. Link to <a href="http://hemantasapkota.github.io/">Home Page</a>
+    </p>
+  </div>
+</footer>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
