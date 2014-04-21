@@ -6,6 +6,7 @@ categories:
     - "Google J2OBJC"
     - "Eclipse Plugin"
     - "Java"
+    - "Projects"
 ---
 ## News ##
  - **21 April 2014**
