@@ -1,0 +1,289 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="http://hemantasapkota.github.io/">
+    <title> Getting Started with Google Protobuf - 2 </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/getting-started-with-google-protobuf-in-eclipse-rcp-part-ii">
+    
+
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/syntax.css">
+<link rel="stylesheet" href="http://hemantasapkota.github.io/css/lanyon.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/">Home</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/posts">Blog</a>
+    <a class="sidebar-nav-item" href="http://hemantasapkota.github.io/categories/projects">Projects</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014 Hemanta Sapkota. Powered by <a href="http://hugo.spf13.com">Hugo</a>. Design adapted from <a href="http://lanyon.getpoole.com">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="http://hemantasapkota.github.io/posts" title="Blog">Blog Posts</a>
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">Getting Started with Google Protobuf - 2</h1>
+        <section id="main">
+          <h5 id="date"> Thu Dec 6, 2012 </h5>
+          
+
+<p>Before starting with this tutorial, you should ensure that you have WindowBuilder Pro installed from the following update site: <a href="http://download.eclipse.org/windowbuilder/WB/release/R201206261200/4.2/">http://download.eclipse.org/windowbuilder/WB/release/R201206261200/4.2/</a> . This link is for Eclipse Juno/Kepler 4.2/4.3. If you are using an older version of Eclipse, you should see <a href="https://developers.google.com/java-dev-tools/download-wbpro">here</a>  on how to install WindowBuilder for that version.</p>
+
+<h2 id="toc_0"> 1. Install Protocol Buffer Editor and Set preferences</h2>
+
+<p><a href="http://code.google.com/p/protobuf-dt/">protobuf-dt</a>  is an eclipse plugin for creating, editing and compiling messages in Google Protobuf. You can install protobuf-dt from here: <a href="http://code.google.com/p/protobuf-dt/wiki/Installing">http://code.google.com/p/protobuf-dt/wiki/Installing</a> . After the installation is complete, you should set some preferences for protobuf-dt as shown in the image below. The configuration shown in the image is specific for Mac OsX. </p>
+
+<p><img src="images/25-img-001.png" alt="" />
+</p>
+
+<h2 id="toc_1">2. Create an Eclipse RCP application with a form editor [Advanced]</h2>
+
+<p>This section is going to be a bit lengthy and advanced. Here, we create an Eclipse RCP application that has the following features:</p>
+
+<ol>
+<li>Custom perspective</li>
+<li>A Common Navigator View</li>
+<li>A Form Editor for managing addresses i.e. An Address Book</li>
+</ol>
+
+<p>In the project/package explorer right click and create a new <strong>Plug-in Project</strong> named <strong>contacts-manager</strong>. Continue pressing the <strong>next</strong> button until you reach the <strong>Templates </strong>page. Select <strong>Hello RCP</strong> template and press the <strong>Finish </strong>button. This will result in the <strong>manifest</strong> editor for the project to open automatically as shown in the image below. </p>
+
+<p><img src="images/25-img-002.png" alt="" />
+</p>
+
+<p> In the top right of the image, I&rsquo;ve annotated the <strong>Run</strong> button. If you press the <strong>Run </strong>button, you should see an empty application window with the title <strong>Hello RCP. </strong>Next, We will add the <strong>Eclipse Common Navigator view</strong> in the application. <a href="http://wiki.eclipse.org/index.php/Common_Navigator_Framework">Eclipse Common Navigator Framework</a>  allows you to create and manage projects/files in the workspace of your RCP application.</p>
+
+<p>In the <strong>Manifest editor,</strong> click on the <strong>Extensions **tab and </strong>Add<strong> the </strong>org.eclipse.ui.navigator.viewer <strong>as shown in the images below. Essentially, we are adding a view to our RCP. Therefore, the view id is important to note. The view id that I set is *<em>contacts_manager.comnav. </em>*We will use this view id later</strong>.**</p>
+
+<p>*<em><img src="images/25-img-003.png" alt="" />
+ <img src="images/25-img-004.png" alt="" />
+ </em>*</p>
+
+<p><strong> </strong>Now, we need to write some codes to make the CNF show up properly in the RCP application. Open up <strong>ApplicationWorkbenchAdvisor.java</strong> and add the following two methods to it:****</p>
+
+<pre><code>@Override
+</code></pre>
+
+<p>public void initialize(IWorkbenchConfigurer configurer) {
+    super.initialize(configurer);
+    IDE.registerAdapters(); // IDE is declared in org.eclipse.ui.ide so make sure to add the package to dependencies of the RCP
+  }</p>
+
+<p>//With this method, we set the root of our workspace as default input.
+@Override
+public IAdaptable getDefaultPageInput() {
+     IWorkspace workspace = ResourcesPlugin.getWorkspace();
+     return workspace.getRoot();
+}
+Next, open up <strong>Perspective.java </strong>and add the following code to <strong>createInitialLayout</strong> method.</p>
+
+<p><code>layout.addView(&quot;contacts_manager.comnav&quot;, IPageLayout.LEFT, 0.10f, layout.getEditorArea());</code></p>
+
+<p>The code above adds the common navigator view to the perspective of our RCP application. If you run the RCP application now, it should look similar to the image below.</p>
+
+<p><img src="images/25-img-005.png" alt="" />
+</p>
+
+<p>Next, we create an editor for managing simple contacts.</p>
+
+<p>In the <strong>Dependencies</strong> tab of <strong>manifest editor,</strong> add <strong>org.eclipse.ui.forms</strong> as a dependency. Then, go to <strong>Extensions</strong> tab and add a new extension <strong>org.eclipse.ui.editors</strong> as shown in the images below. We&rsquo;ll be using <strong>Multi-page Editor</strong> template, so don&rsquo;t forget to select it as well.</p>
+
+<p><img src="images/25-img-006.png" alt="" />
+ <img src="images/25-img-007.png" alt="" />
+</p>
+
+<p>The template creates two files: <strong>ContactEditor.java </strong>and <strong>ContactEditorContributor.java</strong>. Because we&rsquo;re creating an editor for managing simple contacts, we&rsquo;ll remove all the template code and start with our own. Remove all the template code from <strong>ContactEditor.java</strong> and use the following code as the starting point. You might as well delete <strong>ContactEditorContributor.java</strong> because we won&rsquo;t be using it. If you do so, don&rsquo;t forget to remove the corresponding reference to it in the manifest file.</p>
+
+<p>public class ContactEditor extends FormEditor {</p>
+
+<pre><code>@Override
+protected void addPages() {
+}
+
+@Override
+public void doSave(IProgressMonitor monitor) {
+}
+
+@Override
+public void doSaveAs() {
+}
+
+@Override
+public boolean isSaveAsAllowed() {
+    return false;
+}
+</code></pre>
+
+<p>}
+A <strong>Form editor</strong> is a collection of form pages. We&rsquo;ll create a form page using <strong>Window Builder</strong>. As shown in the images below, create a new form page called <strong>ContactFormPage.java.</strong></p>
+
+<p><img src="images/25-img-008.png" alt="" />
+ <img src="images/25-img-009.png" alt="" />
+</p>
+
+<p>Using the <strong>Window Builder</strong>, we will create a simple form like below:</p>
+
+<p><img src="images/25-img-010.png" alt="" />
+</p>
+
+<p>The following are the variable names for the text fields:<strong> txtFirstName, txtMiddleName, txtLastName, txtMobile, </strong><strong>txtHomepage, </strong>and <strong>btnSave. </strong>We need to add this form page in the <strong>ContactEditor.java</strong> file. Update the <strong>ContactEditor.java</strong> file as below:</p>
+
+<pre><code>public class ContactEditor extends FormEditor {
+
+    ContactFormPage cfp;
+
+    @Override
+    protected void addPages() {
+        try {
+            cfp = new ContactFormPage(this, &quot;ContactFormPage&quot;, &quot;Contacts&quot;);
+
+            addPage(cfp);
+        } catch (PartInitException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void setInput(IEditorInput input) {
+        super.setInput(input);
+
+        setPartName(&quot;Simple Contact Editor&quot;);
+    }
+
+    @Override
+    public void doSave(IProgressMonitor monitor) {
+    }
+
+    @Override
+    public void doSaveAs() {
+    }
+
+    @Override
+    public boolean isSaveAsAllowed() {
+        return false;
+    }
+
+}
+</code></pre>
+
+<h2 id="toc_2">Testing what we have so far</h2>
+
+<p>In the last section we covered a lot of information related to creating a RCP application with a common navigator; and a simple form editor. To test what we have so far, run the application and create a new project called <strong>addresses.</strong> In this project, create a new file called <strong>supervisor.contact</strong>. This is shown in image below.</p>
+
+<p><img src="images/25-img-011.png" alt="" />
+</p>
+
+<p> </p>
+
+<p>Click on the <strong>Finish </strong>button. You should now have the form editor open the contact file automatically as shown in the image below.</p>
+
+<p><img src="images/25-img-012.png" alt="" />
+  <strong> </strong></p>
+
+<p>*<strong><em>That&rsquo;s it for this part. In the <a href="index.php/blog/eclipse/27-getting-started-with-google-protobuf-in-eclipse-rcp-part-iii">next and final part</a> , we will focus on how to persist the data for the </em>*.contact </strong>file using Google Protobuf.</p>
+
+        </section>
+    </div>
+  </div>
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+
+<div class="container">
+  <hr />
+  <hr />
+  
+    <span class="left">
+    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/sloot-editor">Sloot Editor</a>
+    </span>
+  
+
+  
+    <span class="right">
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/getting-started-with-google-protobuf-in-eclipse"> &nbsp; Getting Started with Google Protobuf - 1</a> &raquo;
+    </span>
+  
+</div>
+
+  <br />
+  
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/google-protobuf">Google Protobuf</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/eclipse">Eclipse</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/java">Java</a> </li>
+    
+  </ul>
+</div>
+
+
+
+  
+  
+
+<div class="container content">
+<footer>
+  <div>
+    <p class="right credit">
+    Fancy footer here. Link to <a href="http://hemantasapkota.github.io/">Home Page</a>
+    </p>
+  </div>
+</footer>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
