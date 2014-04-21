@@ -59,13 +59,11 @@
           <h5 id="date"> Thu Dec 6, 2012 </h5>
           
 
-<h2 id="toc_0"> Setting up Google Protobuf - Compiling tools and API</h2>
+<h2 id="toc_0">1. Setting up Google Protobuf - Compiling tools and API</h2>
 
-<ol>
-<li><p>Download Google Protobuf 2.4.1 from <a href="http://code.google.com/p/protobuf/downloads/list">http://code.google.com/p/protobuf/downloads/list</a></p></li>
+<p>Download Google Protobuf 2.4.1 from <a href="http://code.google.com/p/protobuf/downloads/list">http://code.google.com/p/protobuf/downloads/list</a></p>
 
-<li><p>Compile Google Protobuf</p></li>
-</ol>
+<h3 id="toc_1">Compile Google Protobuf</h3>
 
 <p>I&rsquo;m using OSX Lion and Eclipse Juno. In OSX, before compiling you need to install command line tools. See here on how to do it. You can skip it, if you already have the command line tools installed. You can check if it is installed from Xcode 4 Preferences.<img src="images/23-img-005.png" alt="" />
 </p>
@@ -76,9 +74,7 @@
 
 <p>The protobuf compiler is installed at <code>/usr/local/bin/protoc</code></p>
 
-<ol>
-<li>Create protobuf-2.4.1.jar API file</li>
-</ol>
+<h3 id="toc_2">Create protobuf-2.4.1.jar API file</h3>
 
 <p>You&rsquo;ll have to compile and bundle the Java API as well. The quickest way to do it is to use Maven to package the JAR file. Inside the protobuf-2.4.1 folder that you unzipped, open the terminal and change the directory to &ldquo;java&rdquo;. Use the following command to compile and bundle the JAR file:</p>
 
@@ -89,39 +85,33 @@
 <p><img src="images/23-img-006.png" alt="" />
 </p>
 
-<h2 id="toc_1"> Setting up Google Protobuf - Eclipse plugin</h2>
+<h2 id="toc_3"> 2. Setting up Google Protobuf - Eclipse plugin</h2>
 
-<p> Now, we create an eclipse plugin from existing JAR archive just like the way we did it here: <a href="index.php/blog/eclipse/22-creating-eclipse-plugins-from-any-jar-archives-or-existing-frameworks">http://hsapkota.com.au/index.php/blog/eclipse/22-creating-eclipse-plugins-from-any-jar-archives-or-existing-frameworks</a></p>
+<p> Now, we create an eclipse plugin from existing JAR archive just like the way we did it here: <a href="posts/creating-eclipse-plugins-from-any-jar-archives-or-existing-frameworks">http://hsapkota.com.au/index.php/blog/eclipse/22-creating-eclipse-plugins-from-any-jar-archives-or-existing-frameworks</a></p>
 
-<ol>
-<li>Create a new Eclipse plugin project from existing JAR archives</li>
-</ol>
+<h3 id="toc_4">Create a new Eclipse plugin project from existing JAR archives</h3>
 
 <p><img src="images/img001.png" alt="" />
 </p>
 
-<ol>
-<li>Add external JAR file protobuf-2.4.1.jar that we just compiled</li>
-</ol>
+<h3 id="toc_5">Add external JAR file protobuf-2.4.1.jar that we just compiled</h3>
 
 <p><img src="images/23-img-002.png" alt="" />
 </p>
 
-<p> 3. Enter name and version for the eclipse plugin</p>
+<h3 id="toc_6">Enter name and version for the eclipse plugin</h3>
 
 <p><img src="images/23-img-001.png" alt="" />
 </p>
 
-<ol>
-<li>You should see the plugin in your package explorer now.</li>
-</ol>
+<h3 id="toc_7">You should see the plugin in your package explorer now.</h3>
 
 <p><img src="images/23-img-004.png" alt="" />
 </p>
 
 <p>I&rsquo;ve created a <a href="https://github.com/hemantasapkota/google-protobuf-2.4.1">GitHub project</a>  for this plugin so that other users can use it without having to recompile the files.</p>
 
-<p>That&rsquo;s it for this part. In <a href="index.php/blog/eclipse/25-getting-started-with-google-protobuf-in-eclipse-rcp-part-ii">Part II</a> , we&rsquo;ll look in creating a RCP application and integrate the plugin we just created for serializing and deserializing data.</p>
+<p>That&rsquo;s it for this part. In <a href="posts/getting-started-with-google-protobuf-in-eclipse-rcp-part-ii">Part II</a> , we&rsquo;ll look in creating a RCP application and integrate the plugin we just created for serializing and deserializing data.</p>
 
         </section>
     </div>

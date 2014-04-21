@@ -1,6 +1,6 @@
 ---
 title: "Setting Up JadClipse and JAD Decompiler in Eclipse"
-description: "JadClipse and JAD Decompiler are useful utils for viewing sources for .class files. Here are the steps required for setting then up in Eclipse."
+description: "JadClipse and JAD Decompiler are useful utils for viewing sources for .class files. Here are the steps required for setting them up in Eclipse."
 date: "2012-12-06"
 categories:
     - "Eclipse"
