@@ -30,3 +30,5 @@ Node train
 
 All in all, there's no doubt that the book will serve as a handy reference for
 Javascript developers
+
+Find this book on [Amazon.](http://www.amazon.com/Getting-Started-Grunt-JavaScript-Runner/dp/1783980621/ref=cm_rdp_product)
