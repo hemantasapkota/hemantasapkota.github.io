@@ -21,9 +21,11 @@ appendix. Although, the book does contain a good reference list on Javascript.
 
 Who will benefit from the book ? Not including the usual front-end developers
 and framework creators:
-1. Experienced Java developers like myself who've made the move to the dynamic
+
+  1. Experienced Java developers like myself who've made the move to the dynamic
 world of Javascript (front-end/backend)
-2. Web developers proficient in JQuery/PHP but have failed to get onboard the
+
+  2. Web developers proficient in JQuery/PHP but have failed to get onboard the
 Node train
 
 All in all, there's no doubt that the book will serve as a handy reference for
