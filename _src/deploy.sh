@@ -8,7 +8,7 @@ hugo
 git add -A :/
 
 # Commit changes.
-msg="rebuilding site `date`"
+msg="Updating content `date`"
 if [ $# -eq 1 ]
   then msg="$1"
 fi
