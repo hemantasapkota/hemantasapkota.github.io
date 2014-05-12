@@ -5,12 +5,6 @@ echo -e "\033[0;32mDeploying updates to Github...\033[0m"
 # Build the project.
 hugo
 
-# Add changes to git.
-# rm -rf ../categories
-# rm -rf ../css
-# rm -rf ../posts
-#
-# mv public/* ../
 git add -A :/
 
 # Commit changes.
