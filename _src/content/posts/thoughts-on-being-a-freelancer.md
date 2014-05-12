@@ -7,7 +7,7 @@ categories:
     - "ODesk"
 ---
 
-The other day I took a few skills tests for Java, Node.JS and IOS Development on [ODesk](http://www.odesk.com), and was surprisingly happy with the results. Although, I admit I could've done better with IOS.
+The other day I took a few skills tests for Java, Node.JS and IOS Development on [ODesk](http://www.odesk.com), and was surprisingly happy with the results. Although, I admit I could've done better with IOS because I took all the tests on the same day.
 
 ![][1]
 
