@@ -9,4 +9,6 @@ categories:
 
 The other day I took a few skills tests for Java, Node.JS and IOS Development on [ODesk](http://www.odesk.com), and was surprisingly happy with the results.
 
-![][images/hemanta-odesk-tests.png]
+![][1]
+
+[1]: images/hemanta-odesk-tests.png
