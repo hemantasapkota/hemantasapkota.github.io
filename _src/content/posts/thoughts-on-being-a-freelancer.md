@@ -14,6 +14,7 @@ The other day I took a few skills tests for Java, Node.JS and IOS Development on
 You can take retests on Odesk after a month of taking the original one. So I defintely inted to take the IOS test again.
 
 It's been a while since I have worked on real IOS project that utlises the core IOS SDK. The last work that I did was whilst I was working for Adtec, where I worked on the [Qocca](https://www.qocca.com/) app.
+
 I'm looking forward to getting up to the speed with IOS 7 SDK updates. Looks like http://ios7.codeschool.com/ is perfect for this.
 
 In the meantime, I'll work on setting up a good profile for ODesk and hopefully land some good jobs.
