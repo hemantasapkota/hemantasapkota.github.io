@@ -37,7 +37,7 @@ Mechanical keyboard are absolutely great. I just feel dumb not knowing about
 them earlier. I'm now typing longer, faster and better.
 
 Getting used to it took about a week, and to make the process fun I used this
-(Typing.io)[http://typing.io].
+[Typing.io](http://typing.io).
 
 For more information about mechanical keyboards, see:
 
