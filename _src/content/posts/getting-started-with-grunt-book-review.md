@@ -8,6 +8,8 @@ categories:
     - "Javascript"
     - "Book Reviews"
 ---
+![Getting Started with Grunt](http://ecx.images-amazon.com/images/I/51anjUw7hIL.jpg)
+
 The book maybe about Grunt, but its biggest value proposition, IMHO, is the
 excellent walkthrough on the Node.js ecosystem and modern web development.
 
