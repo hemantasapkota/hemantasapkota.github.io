@@ -1,6 +1,6 @@
 ---
 title: "Switching to a Mechanical Keyboard"
-description: "Glad I discovered mechanical keyboard."
+description: "With a mechanical keyboard, I'm now typing faster, longer and better."
 date: "2014-05-17"
 categories:
     - "Keyboards"
