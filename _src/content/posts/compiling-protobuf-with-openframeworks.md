@@ -6,4 +6,6 @@ categories:
     - "Google Protobuf"
     - "XCode"
     - "OpenFrameworks"
+    - "C++"
+    - "Objective-C++"
 ---
