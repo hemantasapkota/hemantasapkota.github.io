@@ -14,7 +14,7 @@ openFrameworks (c++) in XCode 5.1.1, without success.
 Actually, getting protobuf to work in standard IOS projects is trivial, thanks to
 CocoaPods. A ```Podfile``` with the following entry
 ```pod 'GoogleProtobuf', '~> 2.5.0'``` combined with ```pod install```
-does the job very well.
+does the job very well. Also, see [this.](http://stackoverflow.com/questions/19444376/compile-protobuf-with-xcode-5)
 
 However, openFrameworks has its own build settings that does not play well
 with CocoaPods workspace. Thankfully, [protobuf-objc](http://protobuf.axo.io/)
