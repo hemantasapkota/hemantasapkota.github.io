@@ -63,7 +63,17 @@
       <h1 class="post-title">Compiling protobuf with openFrameworks.</h1>
         <section id="main">
           <h5 id="date"> Thu May 22, 2014 </h5>
-          
+          <p>For the past two days, I&rsquo;ve been trying to get Google Protobuf to work with
+openFrameworks (c++) in XCode 5.1.1, without success.</p>
+
+<p>Actually, getting protobuf to work in standard IOS projects is trivial, thanks to
+CocoaPods. A <code>Podfile</code> with the following entry
+<code>pod 'GoogleProtobuf', '~&gt; 2.5.0'</code>
+does the job very well.</p>
+
+<p>However, openFrameworks has it&rsquo;s own build settings that does not play well
+with CocoaPods workspace.</p>
+
         </section>
     </div>
   </div>
