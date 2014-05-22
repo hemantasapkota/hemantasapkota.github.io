@@ -7,5 +7,4 @@ categories:
     - "XCode"
     - "OpenFrameworks"
     - "C++"
-    - "Objective-C++"
 ---
