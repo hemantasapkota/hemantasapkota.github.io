@@ -68,11 +68,21 @@ openFrameworks (c++) in XCode 5.1.1, without success.</p>
 
 <p>Actually, getting protobuf to work in standard IOS projects is trivial, thanks to
 CocoaPods. A <code>Podfile</code> with the following entry
-<code>pod 'GoogleProtobuf', '~&gt; 2.5.0'</code>
+<code>pod 'GoogleProtobuf', '~&gt; 2.5.0'</code> combined with <code>pod install</code>
 does the job very well.</p>
 
-<p>However, openFrameworks has it&rsquo;s own build settings that does not play well
-with CocoaPods workspace.</p>
+<p>However, openFrameworks has its own build settings that does not play well
+with CocoaPods workspace. Thankfully, <a href="http://protobuf.axo.io/">protobuf-objc</a>
+is here to save the day.</p>
+
+<p><a href="http://protobuf.axo.io/">protobuf-objc</a> is an implementation of Protocol
+Buffers in Objective-C. Installation procedure is straight forward. The only
+thing to remember is that compiling <code>.proto</code> files should done via. the
+<code>protoc-gen-objc</code> plugin. More specifically,</p>
+
+<p><code>protoc --plugin=/usr/local/bin/protoc-gen-objc person.proto --objc_out=&quot;./&quot;</code></p>
+
+<p>The resulting files are <code>pb.h</code> &amp; <code>pb.mm</code>.</p>
 
         </section>
     </div>
