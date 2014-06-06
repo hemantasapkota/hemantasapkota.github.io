@@ -43,11 +43,10 @@ func main() {
   m := martini.Classic()
   m.Map(db)
 
-  //Get model.proto required by the javascript client
   m.Get("/model", handler.GetProtoSchema)
   m.Get("/words", handler.GetWords)
   m.Post("/word", handler.PostWord)
-  ▸ m.Post("/tag", handler.TagWord)
+  m.Post("/tag", handler.TagWord)
   m.Delete("/word/:name", handler.DeleteWord)
   m.Post("/upload", handler.UploadPic)
 
