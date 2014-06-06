@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Compiling protobuf with openFrameworks. </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/compiling-protobuf-with-openframeworks">
+    <title> Selecting a GO web framework - Martini </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/selecting-a-go-web-framework">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -60,29 +60,18 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Compiling protobuf with openFrameworks.</h1>
+      <h1 class="post-title">Selecting a GO web framework - Martini</h1>
         <section id="main">
-          <h5 id="date"> Thu May 22, 2014 </h5>
-          <p>For the past two days, I&rsquo;ve been trying to get Google Protobuf to work with
-openFrameworks (c++) in XCode 5.1.1, without success.</p>
+          <h5 id="date"> Fri Jun 6, 2014 </h5>
+          <p>When GO came out in 2009, I had looked into it briefly. At the time, I didn&rsquo;t have much experience writing web servers or concurrent systems,
+therefore, couldn&rsquo;t fully put in perspective the different features Go had introduced.</p>
 
-<p>Actually, getting protobuf to work in standard IOS projects is trivial, thanks to
-CocoaPods. A <code>Podfile</code> with the following entry
-<code>pod 'GoogleProtobuf', '~&gt; 2.5.0'</code> combined with <code>pod install</code>
-does the job very well. Also, see <a href="http://stackoverflow.com/questions/19444376/compile-protobuf-with-xcode-5">this.</a></p>
+<p>Fast forward around April 2014, I picked up GO again. I even attended GoLang Sydney Meetup ThoughtWorks.</p>
 
-<p>However, openFrameworks has its own build settings that does not play well
-with CocoaPods workspace. Thankfully, <a href="http://protobuf.axo.io/">protobuf-objc</a>
-is here to save the day.</p>
+<p><img src="images/GoLangMeetupSyd2014.jpg" alt="" />
+</p>
 
-<p><a href="http://protobuf.axo.io/">protobuf-objc</a> is an implementation of Protocol
-Buffers in Objective-C. Installation procedure is straight forward. The only
-thing to remember is that compiling <code>.proto</code> files should done via. the
-<code>protoc-gen-objc</code> plugin. More specifically,</p>
-
-<p><code>protoc --plugin=/usr/local/bin/protoc-gen-objc person.proto --objc_out=&quot;./&quot;</code></p>
-
-<p>The resulting files are <code>pb.h</code> &amp; <code>pb.mm</code>.</p>
+<p>After having done extensive Javascript and Node.JS, I have begun to fully appreciate the Go.</p>
 
         </section>
     </div>
@@ -96,14 +85,10 @@ thing to remember is that compiling <code>.proto</code> files should done via. t
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/selecting-a-go-web-framework">Selecting a GO web framework - Martini</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/switching-to-a-mechanical-keyboard"> &nbsp; Switching to a Mechanical Keyboard</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/compiling-protobuf-with-openframeworks"> &nbsp; Compiling protobuf with openFrameworks.</a> &raquo;
     </span>
   
 </div>
@@ -114,13 +99,9 @@ thing to remember is that compiling <code>.proto</code> files should done via. t
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/google-protobuf">Google Protobuf</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/google-go">Google GO</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/xcode">XCode</a> </li>
-    
-      <li><a href="http://hemantasapkota.github.io/categories/openframeworks">OpenFrameworks</a> </li>
-    
-      <li><a href="http://hemantasapkota.github.io/categories/c">C&#43;&#43;</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/martini-web-framework">Martini Web Framework</a> </li>
     
   </ul>
 </div>

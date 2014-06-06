@@ -2,13 +2,14 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Compiling protobuf with openFrameworks. </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/compiling-protobuf-with-openframeworks">
+    <title> Google-Go </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/categories/google-go">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -58,74 +59,40 @@
       </div>
     </div>
 
-    
+  
     <div class="container content">
-      <h1 class="post-title">Compiling protobuf with openFrameworks.</h1>
+      <h1 class="post-title">Recent Posts</h1>
         <section id="main">
-          <h5 id="date"> Thu May 22, 2014 </h5>
-          <p>For the past two days, I&rsquo;ve been trying to get Google Protobuf to work with
-openFrameworks (c++) in XCode 5.1.1, without success.</p>
+          <div>
+            <h5><a href="http://hemantasapkota.github.io/categories">Full Category Index</a></h5>
+            <h2>Posts in &ldquo;Google-Go&rdquo;</h2>
+            
+            
+<li>
+  <span><h2><a href='http://hemantasapkota.github.io/posts/selecting-a-go-web-framework'> Selecting a GO web framework - Martini</a> </h2></span>
+  <span class="left">Fri, Jun 6, 2014</span>
+  <span class="right">
+    <ul class="catlist">
+      
+        <li><a href="http://hemantasapkota.github.io/categories/google-go">Google GO</a> </li>
+      
+        <li><a href="http://hemantasapkota.github.io/categories/martini-web-framework">Martini Web Framework</a> </li>
+      
+    </ul>
+  </span>
 
-<p>Actually, getting protobuf to work in standard IOS projects is trivial, thanks to
-CocoaPods. A <code>Podfile</code> with the following entry
-<code>pod 'GoogleProtobuf', '~&gt; 2.5.0'</code> combined with <code>pod install</code>
-does the job very well. Also, see <a href="http://stackoverflow.com/questions/19444376/compile-protobuf-with-xcode-5">this.</a></p>
+  <br />
+  Using Martini Web Framework for GoLang.
+</li>
 
-<p>However, openFrameworks has its own build settings that does not play well
-with CocoaPods workspace. Thankfully, <a href="http://protobuf.axo.io/">protobuf-objc</a>
-is here to save the day.</p>
-
-<p><a href="http://protobuf.axo.io/">protobuf-objc</a> is an implementation of Protocol
-Buffers in Objective-C. Installation procedure is straight forward. The only
-thing to remember is that compiling <code>.proto</code> files should done via. the
-<code>protoc-gen-objc</code> plugin. More specifically,</p>
-
-<p><code>protoc --plugin=/usr/local/bin/protoc-gen-objc person.proto --objc_out=&quot;./&quot;</code></p>
-
-<p>The resulting files are <code>pb.h</code> &amp; <code>pb.mm</code>.</p>
-
+            
+          </div>
         </section>
+
     </div>
   </div>
 
   <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-  
-
-<div class="container">
-  <hr />
-  <hr />
-  
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/selecting-a-go-web-framework">Selecting a GO web framework - Martini</a>
-    </span>
-  
-
-  
-    <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/switching-to-a-mechanical-keyboard"> &nbsp; Switching to a Mechanical Keyboard</a> &raquo;
-    </span>
-  
-</div>
-
-  <br />
-  
-<div class="container">
-  <ul class="catlist">
-    <li><em>Categories: </em></li>
-    
-      <li><a href="http://hemantasapkota.github.io/categories/google-protobuf">Google Protobuf</a> </li>
-    
-      <li><a href="http://hemantasapkota.github.io/categories/xcode">XCode</a> </li>
-    
-      <li><a href="http://hemantasapkota.github.io/categories/openframeworks">OpenFrameworks</a> </li>
-    
-      <li><a href="http://hemantasapkota.github.io/categories/c">C&#43;&#43;</a> </li>
-    
-  </ul>
-</div>
-
-
 
   
   
@@ -155,7 +122,4 @@ thing to remember is that compiling <code>.proto</code> files should done via. t
 
 </body>
 </html>
-
-
-
 
