@@ -22,7 +22,6 @@ Go is likely to be a number one choice for writing servers in the coming years.
 Conceptually, It's similar to Express-JS, which the main reason why I went with it.
 
 ## Sample Code - Martini + LevelDB ##
-Here's a sample code from one of my projects using Martini and GoLang. 
 
 ```
 package main
