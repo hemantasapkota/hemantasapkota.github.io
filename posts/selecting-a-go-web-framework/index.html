@@ -78,8 +78,42 @@ I even attended GoLang Sydney Meetup at ThoughtWorks.</p>
 
 <h2 id="toc_0">Martini by CodeGangsta</h2>
 
-<p><a href="https://github.com/go-martini/martini">Martini</a> is an extremely easy to pick up framework for writing web applications in GO.
-The main reason for to me go with Martini was that it is conceptually similar to Express-JS.</p>
+<p><a href="https://github.com/go-martini/martini">Martini</a> is a framework for writing web applications in GO, which is extremely easy to pick up.
+Conceptually, It&rsquo;s similar to Express-JS, which the main reason why I went with it.</p>
+
+<h2 id="toc_1">Sample Code - Martini + LevelDB</h2>
+
+<p>Here&rsquo;s a sample code from one of my projects using Martini and GoLang.</p>
+
+<pre><code>package main
+
+import (
+  &quot;sample/handler&quot;
+  &quot;github.com/go-martini/martini&quot;
+  &quot;github.com/syndtr/goleveldb/leveldb&quot;
+)
+
+func main() {
+  db, err := leveldb.OpenFile(&quot;db&quot;, nil)
+  if err != nil {
+    panic(err)
+  }
+  defer db.Close()
+
+  m := martini.Classic()
+  m.Map(db)
+
+  //Get model.proto required by the javascript client
+  m.Get(&quot;/model&quot;, handler.GetProtoSchema)
+  m.Get(&quot;/words&quot;, handler.GetWords)
+  m.Post(&quot;/word&quot;, handler.PostWord)
+  ▸ m.Post(&quot;/tag&quot;, handler.TagWord)
+  m.Delete(&quot;/word/:name&quot;, handler.DeleteWord)
+  m.Post(&quot;/upload&quot;, handler.UploadPic)
+
+  m.Run()
+}
+</code></pre>
 
         </section>
     </div>

@@ -18,9 +18,42 @@ Go is likely to be a number one choice for writing servers in the coming years.
 
 ## Martini by CodeGangsta ##
 
-[Martini](https://github.com/go-martini/martini) is an extremely easy to pick up framework for writing web applications in GO.
-The main reason for to me go with Martini was that it is conceptually similar to Express-JS.
+[Martini](https://github.com/go-martini/martini) is a framework for writing web applications in GO, which is extremely easy to pick up.
+Conceptually, It's similar to Express-JS, which the main reason why I went with it.
 
+## Sample Code - Martini + LevelDB ##
+Here's a sample code from one of my projects using Martini and GoLang. 
+
+```
+package main
+
+import (
+  "sample/handler"
+  "github.com/go-martini/martini"
+  "github.com/syndtr/goleveldb/leveldb"
+)
+
+func main() {
+  db, err := leveldb.OpenFile("db", nil)
+  if err != nil {
+    panic(err)
+  }
+  defer db.Close()
+
+  m := martini.Classic()
+  m.Map(db)
+
+  //Get model.proto required by the javascript client
+  m.Get("/model", handler.GetProtoSchema)
+  m.Get("/words", handler.GetWords)
+  m.Post("/word", handler.PostWord)
+  ▸ m.Post("/tag", handler.TagWord)
+  m.Delete("/word/:name", handler.DeleteWord)
+  m.Post("/upload", handler.UploadPic)
+
+  m.Run()
+}
+```
 
 [1]: images/GoLangMeetupSyd2014.jpg
 
