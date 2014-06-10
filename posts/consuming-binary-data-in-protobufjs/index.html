@@ -87,20 +87,21 @@ message WordList {
 <p>Installation is easy with bower:
 <code>
 bower install --save protobuf
-</code>
-Once installed, don&rsquo;t forget to add libs in your index.html.
-<code>
-&lt;script src=&quot;bower_components/bytebuffer/ByteBuffer.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bower_components/ProtoBuf/ProtoBuf.min.js&quot;&gt;&lt;/script&gt;
-</code>
-Finally, decoding the data.
-```
-WordList = dcodeIO.ProtoBuf.loadProtoFile(&ldquo;/model&rdquo;).build(&ldquo;model.WordList&rdquo;)</p>
+</code></p>
 
-<p>$http.get(&ldquo;/words&rdquo;, {responseType: &ldquo;arraybuffer&rdquo;}).success (data) -&gt;
+<p>Once installed, don&rsquo;t forget to add libs in your index.html.</p>
+
+<pre><code>&lt;script src=&quot;bower_components/bytebuffer/ByteBuffer.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/ProtoBuf/ProtoBuf.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Finally, decoding the data.</p>
+
+<pre><code>WordList = dcodeIO.ProtoBuf.loadProtoFile(&quot;/model&quot;).build(&quot;model.WordList&quot;)
+$http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (data) -&gt;
   wlist = WordList.decode(data)
-  $scope.words = wlist.word;
-```</p>
+  $scope.words = wlist.word
+</code></pre>
 
         </section>
     </div>

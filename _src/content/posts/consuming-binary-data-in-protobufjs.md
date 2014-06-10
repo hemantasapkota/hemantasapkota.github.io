@@ -36,16 +36,18 @@ Installation is easy with bower:
 ```
 bower install --save protobuf
 ```
+
 Once installed, don't forget to add libs in your index.html.
+
 ```
 <script src="bower_components/bytebuffer/ByteBuffer.min.js"></script>
 <script src="bower_components/ProtoBuf/ProtoBuf.min.js"></script>
 ```
 Finally, decoding the data.
+
 ```
 WordList = dcodeIO.ProtoBuf.loadProtoFile("/model").build("model.WordList")
-
 $http.get("/words", {responseType: "arraybuffer"}).success (data) ->
   wlist = WordList.decode(data)
-  $scope.words = wlist.word;
+  $scope.words = wlist.word
 ```
