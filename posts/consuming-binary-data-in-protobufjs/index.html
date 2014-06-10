@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Thank God for Masonry - #IOSDev </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/thank-god-for-masonry-iosdev">
+    <title> Consuming Binary Data in Angular with ProtobufJS </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/consuming-binary-data-in-protobufjs">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -60,10 +60,50 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Thank God for Masonry - #IOSDev</h1>
+      <h1 class="post-title">Consuming Binary Data in Angular with ProtobufJS</h1>
         <section id="main">
           <h5 id="date"> Tue Jun 10, 2014 </h5>
-          
+          <p>For one of the apps that I&rsquo;ve been working on, I have a server written in GO that sends out binary data encoded with Google Protobuf messages via. REST endpoints.
+For example:</p>
+
+<pre><code>message Word {
+  optional string name = 1;
+  optional string category = 2;
+}
+
+message WordList {
+  repeated Word word = 1;
+}
+</code></pre>
+
+<p>The question is how do you consume the binary data in Angular ? The answer - Use <code>responseType: &quot;arraybuffer&quot;</code> in your <code>$http.get</code>.</p>
+
+<pre><code>WordList = dcodeIO.ProtoBuf.loadProtoFile(&quot;/model&quot;).build(&quot;model.WordList&quot;)
+
+$http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (data) -&gt;
+  ##Process data
+</code></pre>
+
+<p>The second question is how do you decode the binary data in Javascript/Angular ? The answer - Use <a href="https://github.com/dcodeIO/ProtoBuf.js">ProtobfJS</a>.</p>
+
+<p>Installation is easy with bower:
+<code>
+bower install --save protobuf
+</code>
+Once installed, don&rsquo;t forget to add libs in your index.html.
+<code>
+&lt;script src=&quot;bower_components/bytebuffer/ByteBuffer.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bower_components/ProtoBuf/ProtoBuf.min.js&quot;&gt;&lt;/script&gt;
+</code>
+Finally, decoding the data.
+```
+WordList = dcodeIO.ProtoBuf.loadProtoFile(&ldquo;/model&rdquo;).build(&ldquo;model.WordList&rdquo;)</p>
+
+<p>$http.get(&ldquo;/words&rdquo;, {responseType: &ldquo;arraybuffer&rdquo;}).success (data) -&gt;
+  wlist = WordList.decode(data)
+  $scope.words = wlist.word;
+```</p>
+
         </section>
     </div>
   </div>
@@ -76,14 +116,10 @@
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/consuming-binary-data-in-protobufjs">Consuming Binary Data in Angular with ProtobufJS</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/selecting-a-go-web-framework"> &nbsp; Selecting a GO web framework - Martini</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/thank-god-for-masonry-iosdev"> &nbsp; Thank God for Masonry - #IOSDev</a> &raquo;
     </span>
   
 </div>
@@ -94,11 +130,15 @@
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/iosdev">IOSDev</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/google-protobuf">Google Protobuf</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/https//github.com/masonry/masonry">https://github.com/Masonry/Masonry</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/protobufjs">ProtobufJS</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/xcode-autolayout">XCode AutoLayout</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/binary-wire-data">Binary Wire Data</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/coffeescript">Coffeescript</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/angularjs">AngularJS</a> </li>
     
   </ul>
 </div>
