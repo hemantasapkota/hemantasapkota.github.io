@@ -1,6 +1,6 @@
 ---
 title: "Consuming Binary Data in Angular with ProtobufJS"
-description: "How to consume and decode binary data in angular with ProtobufJS."
+description: ""
 date: "2014-06-10"
 categories:
     - "Google Protobuf"
@@ -26,8 +26,6 @@ message WordList {
 The question is how do you consume the binary data in Angular ? The answer - Use ```responseType: "arraybuffer"``` in your ```$http.get```.
 
 ```
-WordList = dcodeIO.ProtoBuf.loadProtoFile("/model").build("model.WordList")
-
 $http.get("/words", {responseType: "arraybuffer"}).success (data) ->
   ##Process data
 ```

@@ -78,9 +78,7 @@ message WordList {
 
 <p>The question is how do you consume the binary data in Angular ? The answer - Use <code>responseType: &quot;arraybuffer&quot;</code> in your <code>$http.get</code>.</p>
 
-<pre><code>WordList = dcodeIO.ProtoBuf.loadProtoFile(&quot;/model&quot;).build(&quot;model.WordList&quot;)
-
-$http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (data) -&gt;
+<pre><code>$http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (data) -&gt;
   ##Process data
 </code></pre>
 
