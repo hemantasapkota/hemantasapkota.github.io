@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Selecting a GO web framework - Martini </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/selecting-a-go-web-framework">
+    <title> Thank God for Masonry - #IOSDev </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/thank-god-for-masonry-iosdev">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -60,58 +60,10 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Selecting a GO web framework - Martini</h1>
+      <h1 class="post-title">Thank God for Masonry - #IOSDev</h1>
         <section id="main">
-          <h5 id="date"> Fri Jun 6, 2014 </h5>
+          <h5 id="date"> Tue Jun 10, 2014 </h5>
           
-
-<p>When GO came out in 2009, I had looked into it briefly. At the time, I didn&rsquo;t have much experience writing web servers or concurrent systems,
-therefore, couldn&rsquo;t fully put into perspective the different features Go had introduced.</p>
-
-<p>Fast forward around April 2014, after having extensive experience working on Javascript and Node.JS, I picked up GO again.
-I even attended GoLang Sydney Meetup at ThoughtWorks.</p>
-
-<p><img src="images/GoLangMeetupSyd2014.jpg" alt="" />
-</p>
-
-<p>Go is likely to be a number one choice for writing servers in the coming years.</p>
-
-<h2 id="toc_0">Martini by CodeGangsta</h2>
-
-<p><a href="https://github.com/go-martini/martini">Martini</a> is a framework for writing web applications in GO, which is extremely easy to pick up.
-Conceptually, It&rsquo;s similar to Express-JS, which the main reason why I went with it.</p>
-
-<h2 id="toc_1">Sample Code - Martini + LevelDB</h2>
-
-<pre><code>package main
-
-import (
-  &quot;sample/handler&quot;
-  &quot;github.com/go-martini/martini&quot;
-  &quot;github.com/syndtr/goleveldb/leveldb&quot;
-)
-
-func main() {
-  db, err := leveldb.OpenFile(&quot;db&quot;, nil)
-  if err != nil {
-    panic(err)
-  }
-  defer db.Close()
-
-  m := martini.Classic()
-  m.Map(db)
-
-  m.Get(&quot;/model&quot;, handler.GetProtoSchema)
-  m.Get(&quot;/words&quot;, handler.GetWords)
-  m.Post(&quot;/word&quot;, handler.PostWord)
-  m.Post(&quot;/tag&quot;, handler.TagWord)
-  m.Delete(&quot;/word/:name&quot;, handler.DeleteWord)
-  m.Post(&quot;/upload&quot;, handler.UploadPic)
-
-  m.Run()
-}
-</code></pre>
-
         </section>
     </div>
   </div>
@@ -124,14 +76,10 @@ func main() {
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/thank-god-for-masonry-iosdev">Thank God for Masonry - #IOSDev</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/compiling-protobuf-with-openframeworks"> &nbsp; Compiling protobuf with openFrameworks.</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/selecting-a-go-web-framework"> &nbsp; Selecting a GO web framework - Martini</a> &raquo;
     </span>
   
 </div>
@@ -142,9 +90,11 @@ func main() {
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/google-go">Google GO</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/iosdev">IOSDev</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/martini-web-framework">Martini Web Framework</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/https//github.com/masonry/masonry">https://github.com/Masonry/Masonry</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/xcode-autolayout">XCode AutoLayout</a> </li>
     
   </ul>
 </div>
