@@ -57,7 +57,7 @@
       <h1 class="post-title"></h1>
         <section id="main">
           <ul id="list">
-            {{ range first 10 .Data.Pages }}
+            {{ range first 100 .Data.Pages }}
             {{ .Render "li"}}
             {{ end }}
           </ul>
