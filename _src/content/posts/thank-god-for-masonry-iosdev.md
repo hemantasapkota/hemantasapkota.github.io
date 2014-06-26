@@ -7,4 +7,5 @@ categories:
     - "https://github.com/Masonry/Masonry"
     - "XCode AutoLayout"
 ---
-
+Masonry is a framework built on top of Auto Layout for constructing layouts for IOS/OSX.
+It comes with its own DSL.
