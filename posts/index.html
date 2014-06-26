@@ -74,7 +74,7 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Using LevelDB in Go with Heroku without addons </title>
+    <title> Using LevelDB &amp; Go with Heroku without addons </title>
     <link rel="canonical" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku">
     
 
@@ -127,10 +127,12 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Using LevelDB in Go with Heroku without addons</h1>
+      <h1 class="post-title">Using LevelDB &amp; Go with Heroku without addons</h1>
         <section id="main">
           <h5 id="date"> Thu Jun 26, 2014 </h5>
-          <p>Heroku is great because it allows you to deploy LevelDB in your GO webapp as it is. Google App Engine, on the other hand does not. Instead, it forces to use the DataStore API.</p>
+          <p>Heroku is great because it allows you to deploy LevelDB in your GO webapp as it is. Google App Engine, on the other hand does not. Instead, you&rsquo;d have to use the DataStore API. Not exactly a portable solution, if you wish to migrate your codebase to some other provider in the future.</p>
+
+<p>Here&rsquo;s an examples source:</p>
 
 <pre><code>package main
 
@@ -141,11 +143,19 @@ import (
 func main() {
   db, err := leveldb.OpenFile(&quot;db&quot;, nil)
   if err != nil {
-    panic(err)
+    return
   }
   defer db.Close()
 }
 </code></pre>
+
+<p>To run it all you have to do it:</p>
+
+<pre><code>godep save
+git push heroku master
+</code></pre>
+
+<p>The reason why this works is that the <a href="http://github.com/syndtr/goleveldb/leveldb">leveldb</a> package is a pure GO implementation.</p>
 
         </section>
     </div>
@@ -336,7 +346,7 @@ $http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (
   <hr />
   
     <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku">Using LevelDB in Go with Heroku without addons</a>
+    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku">Using LevelDB &amp; Go with Heroku without addons</a>
     </span>
   
 
