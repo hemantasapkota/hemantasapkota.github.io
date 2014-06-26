@@ -35,7 +35,7 @@ import (
 func main() {
   db, err := leveldb.OpenFile("db", nil)
   if err != nil {
-    panic(err)
+    return
   }
   defer db.Close()
 
