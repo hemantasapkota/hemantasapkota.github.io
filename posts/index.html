@@ -130,7 +130,57 @@
       <h1 class="post-title">Recording and Uploading HTML5 WebAudio - Angular &#43; GO</h1>
         <section id="main">
           <h5 id="date"> Mon Jun 30, 2014 </h5>
-          <p>In this brief tutorial, I&rsquo;ll show how to record audio with HTML5 Web Audio and upload it to server.</p>
+          
+
+<h3 id="toc_0">Introduction</h3>
+
+<p>In this brief tutorial, I&rsquo;ll show how to record audio with HTML5 Web Audio API and upload it to server.</p>
+
+<h3 id="toc_1">Libraries</h3>
+
+<p>We&rsquo;ll use the <a href="https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC">RecordRTC</a> library
+for handling the nitty gritty of Web Audio API.</p>
+
+<h3 id="toc_2">Recording</h3>
+
+<p>The following angular service initialises recordRTC context and maps it to the window.
+```
+angular.module(&lsquo;app.audioMaster&rsquo;, [])</p>
+
+<p>.factory(&lsquo;AudioService&rsquo;, [
+   &lsquo;$window&rsquo;, &lsquo;$http&rsquo;
+   ($window, $http) -&gt;
+     navigator.userMedia = (
+       $window.navigator.getUserMedia ||
+       $window.navigator.webkitGetUserMedia ||
+       $window.navigator.mozGetUserMedia ||
+       $window.navigator.msGetUserMedia)</p>
+
+<pre><code> navigator.getUserMedia {audio:true, video:false},
+   (stream) -&gt;
+     $window.recordRTC = RecordRTC(stream)
+     return
+   (err) -&gt;
+     console.log(err)
+     return
+
+ return {
+   UploadLastRecording: (rec, i) -&gt;
+     blob = $window.recordRTC.getBlob()
+     fd = new FormData()
+     fd.append('audio', blob)
+     $http.post('/path/to/server', fd,
+       {
+         transformRequest: angular.identity
+         headers: {'Content-Type' : undefined }
+       }).success(data) -&gt;
+       console.log(&quot;Posted sound&quot;)
+     return
+ }
+</code></pre>
+
+<p>])
+```</p>
 
         </section>
     </div>
@@ -165,6 +215,8 @@
       <li><a href="http://hemantasapkota.github.io/categories/html5">HTML5</a> </li>
     
       <li><a href="http://hemantasapkota.github.io/categories/web-audio">Web Audio</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/coffeescript">Coffeescript</a> </li>
     
   </ul>
 </div>
