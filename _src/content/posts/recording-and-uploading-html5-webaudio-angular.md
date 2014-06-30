@@ -19,6 +19,7 @@ for handling the nitty gritty of Web Audio API.
 ### Recording ###
 
 The following angular service initialises recordRTC context and maps it to the window.
+
 ```
 angular.module('app.audioMaster', [])
 

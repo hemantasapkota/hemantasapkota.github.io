@@ -76,44 +76,42 @@ for handling the nitty gritty of Web Audio API.</p>
 
 <h3 id="toc_2">Recording</h3>
 
-<p>The following angular service initialises recordRTC context and maps it to the window.
-```
-angular.module(&lsquo;app.audioMaster&rsquo;, [])</p>
+<p>The following angular service initialises recordRTC context and maps it to the window.</p>
 
-<p>.factory(&lsquo;AudioService&rsquo;, [
-   &lsquo;$window&rsquo;, &lsquo;$http&rsquo;
+<pre><code>angular.module('app.audioMaster', [])
+
+.factory('AudioService', [
+   '$window', '$http'
    ($window, $http) -&gt;
      navigator.userMedia = (
        $window.navigator.getUserMedia ||
        $window.navigator.webkitGetUserMedia ||
        $window.navigator.mozGetUserMedia ||
-       $window.navigator.msGetUserMedia)</p>
+       $window.navigator.msGetUserMedia)
 
-<pre><code> navigator.getUserMedia {audio:true, video:false},
-   (stream) -&gt;
-     $window.recordRTC = RecordRTC(stream)
-     return
-   (err) -&gt;
-     console.log(err)
-     return
+     navigator.getUserMedia {audio:true, video:false},
+       (stream) -&gt;
+         $window.recordRTC = RecordRTC(stream)
+         return
+       (err) -&gt;
+         console.log(err)
+         return
 
- return {
-   UploadLastRecording: (rec, i) -&gt;
-     blob = $window.recordRTC.getBlob()
-     fd = new FormData()
-     fd.append('audio', blob)
-     $http.post('/path/to/server', fd,
-       {
-         transformRequest: angular.identity
-         headers: {'Content-Type' : undefined }
-       }).success(data) -&gt;
-       console.log(&quot;Posted sound&quot;)
-     return
- }
+     return {
+       UploadLastRecording: (rec, i) -&gt;
+         blob = $window.recordRTC.getBlob()
+         fd = new FormData()
+         fd.append('audio', blob)
+         $http.post('/path/to/server', fd,
+           {
+             transformRequest: angular.identity
+             headers: {'Content-Type' : undefined }
+           }).success(data) -&gt;
+           console.log(&quot;Posted sound&quot;)
+         return
+     }
+ ])
 </code></pre>
-
-<p>])
-```</p>
 
         </section>
     </div>
