@@ -60,3 +60,18 @@ angular.module('app.audioMaster', [])
 See [here](http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs) for more detail on how to post multipart form data in angular.
 
 ```blob = $window.recordRTC.getBlob()``` returns the binary data which is ready to be sent over the wire.
+
+```AudioService``` will have to be injected in the controller. Ex:
+```
+.controller('audioCtrl', [
+  '$scope', '$window', 'AudioService'
+  ($scope, $window, AudioService) ->
+
+    $scope.onRecord = ->
+      $window.recordRTC.startRecording()
+
+    $scope.onStopRecord = ->
+      $window.recordRTC.stopRecording (audioUrl) ->
+        AudioService.UploadLastRecoding()
+])
+```

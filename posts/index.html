@@ -185,6 +185,23 @@ the audio data to the server.</p>
 
 <p><code>blob = $window.recordRTC.getBlob()</code> returns the binary data which is ready to be sent over the wire.</p>
 
+<p><code>AudioService</code> will have to be injected in the controller. Ex:
+```
+.controller(&lsquo;audioCtrl&rsquo;, [
+  &lsquo;$scope&rsquo;, &lsquo;$window&rsquo;, &lsquo;AudioService&rsquo;
+  ($scope, $window, AudioService) -&gt;</p>
+
+<pre><code>$scope.onRecord = -&gt;
+  $window.recordRTC.startRecording()
+
+$scope.onStopRecord = -&gt;
+  $window.recordRTC.stopRecording (audioUrl) -&gt;
+    AudioService.UploadLastRecoding()
+</code></pre>
+
+<p>])
+```</p>
+
         </section>
     </div>
   </div>
