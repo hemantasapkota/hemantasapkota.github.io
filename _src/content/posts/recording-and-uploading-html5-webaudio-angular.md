@@ -61,7 +61,8 @@ See [here](http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-an
 
 ```blob = $window.recordRTC.getBlob()``` returns the binary data which is ready to be sent over the wire.
 
-```AudioService``` will have to be injected in the controller. Ex:
+```AudioService``` will have to be injected in a controller for proper use. Ex:
+
 ```
 .controller('audioCtrl', [
   '$scope', '$window', 'AudioService'
@@ -75,3 +76,31 @@ See [here](http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-an
         AudioService.UploadLastRecoding()
 ])
 ```
+
+### Server Side Processing with GO + Martini ###
+
+Assuming we're using the following API for posting to the server: "/sound/:key/"
+
+```
+func UploadSound(db *leveldb.DB, r *http.Request) string {
+  file, _, err := r.FormFile("audio")
+  defer file.Close()
+  if err != nil {
+    return "500"
+  }
+
+  filename := fmt.Sprintf("upload/%s.wav", params["key"])
+  out, err := os.Create(filename)
+  defer out.Close()
+  if err != nil {
+    return "500"
+  }
+  _, err = io.Copy(out, file)
+  if err != nil {
+    return "500"
+  }
+  return "200"
+}
+```
+
+The above code reads the blob of audio data and stores it in a folder in the server.

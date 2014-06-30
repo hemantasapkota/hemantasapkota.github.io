@@ -185,22 +185,47 @@ the audio data to the server.</p>
 
 <p><code>blob = $window.recordRTC.getBlob()</code> returns the binary data which is ready to be sent over the wire.</p>
 
-<p><code>AudioService</code> will have to be injected in the controller. Ex:
-```
-.controller(&lsquo;audioCtrl&rsquo;, [
-  &lsquo;$scope&rsquo;, &lsquo;$window&rsquo;, &lsquo;AudioService&rsquo;
-  ($scope, $window, AudioService) -&gt;</p>
+<p><code>AudioService</code> will have to be injected in a controller for proper use. Ex:</p>
 
-<pre><code>$scope.onRecord = -&gt;
-  $window.recordRTC.startRecording()
+<pre><code>.controller('audioCtrl', [
+  '$scope', '$window', 'AudioService'
+  ($scope, $window, AudioService) -&gt;
 
-$scope.onStopRecord = -&gt;
-  $window.recordRTC.stopRecording (audioUrl) -&gt;
-    AudioService.UploadLastRecoding()
+    $scope.onRecord = -&gt;
+      $window.recordRTC.startRecording()
+
+    $scope.onStopRecord = -&gt;
+      $window.recordRTC.stopRecording (audioUrl) -&gt;
+        AudioService.UploadLastRecoding()
+])
 </code></pre>
 
-<p>])
-```</p>
+<h3 id="toc_3">Server Side Processing with GO + Martini</h3>
+
+<p>Assuming we&rsquo;re using the following API for posting to the server: &ldquo;/sound/:key/&rdquo;</p>
+
+<pre><code>func UploadSound(db *leveldb.DB, r *http.Request) string {
+  file, _, err := r.FormFile(&quot;audio&quot;)
+  defer file.Close()
+  if err != nil {
+    return &quot;500&quot;
+  }
+
+  filename := fmt.Sprintf(&quot;upload/%s.wav&quot;, params[&quot;key&quot;])
+  out, err := os.Create(filename)
+  defer out.Close()
+  if err != nil {
+    return &quot;500&quot;
+  }
+  _, err = io.Copy(out, file)
+  if err != nil {
+    return &quot;500&quot;
+  }
+  return &quot;200&quot;
+}
+</code></pre>
+
+<p>The above code reads the blob of audio data and stores it in a folder in the server.</p>
 
         </section>
     </div>
