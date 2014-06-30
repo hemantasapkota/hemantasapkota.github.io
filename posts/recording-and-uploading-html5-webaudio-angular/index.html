@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Using LevelDB &amp; Go with Heroku without addons </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku">
+    <title> Recording and Uploading HTML5 WebAudio - Angular &#43; GO </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/recording-and-uploading-html5-webaudio-angular">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -60,35 +60,10 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Using LevelDB &amp; Go with Heroku without addons</h1>
+      <h1 class="post-title">Recording and Uploading HTML5 WebAudio - Angular &#43; GO</h1>
         <section id="main">
-          <h5 id="date"> Thu Jun 26, 2014 </h5>
-          <p>Heroku is great because it allows you to deploy LevelDB in your GO webapp as it is. Google App Engine, on the other hand does not. Instead, you&rsquo;d have to use the DataStore API. Not exactly a portable solution, if you wish to migrate your codebase to some other provider in the future.</p>
-
-<p>Here&rsquo;s an examples source:</p>
-
-<pre><code>package main
-
-import (
-  &quot;github.com/syndtr/goleveldb/leveldb&quot;
-)
-
-func main() {
-  db, err := leveldb.OpenFile(&quot;db&quot;, nil)
-  if err != nil {
-    return
-  }
-  defer db.Close()
-}
-</code></pre>
-
-<p>To run it all you have to do it:</p>
-
-<pre><code>godep save
-git push heroku master
-</code></pre>
-
-<p>The reason why this works is that the <a href="http://github.com/syndtr/goleveldb/leveldb">leveldb</a> package is a pure GO implementation.</p>
+          <h5 id="date"> Mon Jun 30, 2014 </h5>
+          <p>In this brief tutorial, I&rsquo;ll show how to record audio with HTML5 Web Audio and upload it to server.</p>
 
         </section>
     </div>
@@ -102,14 +77,10 @@ git push heroku master
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/recording-and-uploading-html5-webaudio-angular">Recording and Uploading HTML5 WebAudio - Angular &#43; GO</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/consuming-binary-data-in-protobufjs"> &nbsp; Consuming Binary Data in Angular with ProtobufJS</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku"> &nbsp; Using LevelDB &amp; Go with Heroku without addons</a> &raquo;
     </span>
   
 </div>
@@ -120,11 +91,13 @@ git push heroku master
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
+      <li><a href="http://hemantasapkota.github.io/categories/angularjs">AngularJS</a> </li>
+    
       <li><a href="http://hemantasapkota.github.io/categories/google-go">Google GO</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/heroku">Heroku</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/html5">HTML5</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/leveldb">LevelDB</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/web-audio">Web Audio</a> </li>
     
   </ul>
 </div>
