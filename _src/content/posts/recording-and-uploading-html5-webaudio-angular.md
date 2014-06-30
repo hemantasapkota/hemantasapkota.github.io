@@ -16,9 +16,10 @@ In this brief tutorial, I'll show how to record audio with HTML5 Web Audio API a
 We'll use the [RecordRTC](https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC) library
 for handling the nitty gritty of Web Audio API.
 
-### Recording ###
+### Client side Recording ###
 
-The following angular service initialises recordRTC context and maps it to the window.
+The following angular service initialises recordRTC context and maps it to the window. It also exposes the ```UploadLastRecording``` method for posting
+the audio data to the server.
 
 ```
 angular.module('app.audioMaster', [])
@@ -41,7 +42,7 @@ angular.module('app.audioMaster', [])
          return
 
      return {
-       UploadLastRecording: (rec, i) ->
+       UploadLastRecording: ->
          blob = $window.recordRTC.getBlob()
          fd = new FormData()
          fd.append('audio', blob)
@@ -55,3 +56,7 @@ angular.module('app.audioMaster', [])
      }
  ])
 ```
+
+See [here](http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs) for more detail on how to post multipart form data in angular.
+
+```blob = $window.recordRTC.getBlob()``` returns the binary data which is ready to be sent over the wire.

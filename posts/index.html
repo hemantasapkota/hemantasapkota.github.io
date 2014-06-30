@@ -141,9 +141,10 @@
 <p>We&rsquo;ll use the <a href="https://github.com/muaz-khan/WebRTC-Experiment/tree/master/RecordRTC">RecordRTC</a> library
 for handling the nitty gritty of Web Audio API.</p>
 
-<h3 id="toc_2">Recording</h3>
+<h3 id="toc_2">Client side Recording</h3>
 
-<p>The following angular service initialises recordRTC context and maps it to the window.</p>
+<p>The following angular service initialises recordRTC context and maps it to the window. It also exposes the <code>UploadLastRecording</code> method for posting
+the audio data to the server.</p>
 
 <pre><code>angular.module('app.audioMaster', [])
 
@@ -165,7 +166,7 @@ for handling the nitty gritty of Web Audio API.</p>
          return
 
      return {
-       UploadLastRecording: (rec, i) -&gt;
+       UploadLastRecording: -&gt;
          blob = $window.recordRTC.getBlob()
          fd = new FormData()
          fd.append('audio', blob)
@@ -179,6 +180,10 @@ for handling the nitty gritty of Web Audio API.</p>
      }
  ])
 </code></pre>
+
+<p>See <a href="http://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs">here</a> for more detail on how to post multipart form data in angular.</p>
+
+<p><code>blob = $window.recordRTC.getBlob()</code> returns the binary data which is ready to be sent over the wire.</p>
 
         </section>
     </div>
