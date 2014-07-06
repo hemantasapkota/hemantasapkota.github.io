@@ -200,12 +200,15 @@ void ofApp::stopListening() {
   NSData *data = [[NSMutableData alloc] initWithBytes:input length:bufferSize];
 
   ASIFormDataRequest *dataReq =
-  [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@&quot;http://192.168.0.7:3000/rawsound/sample&quot;]];
+  [ASIFormDataRequest requestWithURL:
+                      [NSURL URLWithString:@&quot;http://192.168.0.7:3000/rawsound/sample&quot;]];
 
-  [dataReq setData:data withFileName:@&quot;audio&quot; andContentType:nil forKey:@&quot;audio&quot;];
+  [dataReq setData:data
+           withFileName:@&quot;audio&quot;
+           andContentType:nil forKey:@&quot;audio&quot;];
 
   [dataReq setCompletionBlock:^{
-    NSLog(@&quot;Success.&quot;); 
+    NSLog(@&quot;Success.&quot;);
   }];
 
   [dataReq setFailedBlock:^{
@@ -215,6 +218,46 @@ void ofApp::stopListening() {
   [dataReq startAsynchronous];
 }
 </code></pre>
+
+<p>That&rsquo;s for the client side. You&rsquo;d still have to process the reqeust in the sever.</p>
+
+<h3 id="toc_3">Server Side - GO</h3>
+
+<pre><code>func UploadRawSound(r *http.Request, params martini.Params) string {
+  file, _, err := r.FormFile(&quot;audio&quot;)
+  defer file.Close()
+  if err != nil {
+    return &quot;500&quot;
+  }
+
+  //Save a raw file
+  out, err := os.Create(&quot;upload/sample.raw&quot;)
+  defer out.Close()
+  if err != nil {
+    return &quot;500&quot;
+  }
+  _, err = io.Copy(out, file)
+  if err != nil {
+    return &quot;500&quot;
+  }
+
+  return &quot;200&quot;
+}
+
+</code></pre>
+
+<p>That&rsquo;s it. Now you can import the sample.raw file in Audacity with the following settings:</p>
+
+<pre><code>32 Bit Float
+Little Endian
+Sample Rate: 16000
+Channels: 1
+</code></pre>
+
+<p>Also depicted in the image below:</p>
+
+<p><img src="images/audacitysettings.png" alt="" />
+</p>
 
         </section>
     </div>

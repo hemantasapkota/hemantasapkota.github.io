@@ -77,12 +77,15 @@ void WordTrainingApp::uploadSound(float *input, int bufferSize) {
   NSData *data = [[NSMutableData alloc] initWithBytes:input length:bufferSize];
 
   ASIFormDataRequest *dataReq =
-  [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@"http://192.168.0.7:3000/rawsound/sample"]];
+  [ASIFormDataRequest requestWithURL:
+                      [NSURL URLWithString:@"http://192.168.0.7:3000/rawsound/sample"]];
 
-  [dataReq setData:data withFileName:@"audio" andContentType:nil forKey:@"audio"];
+  [dataReq setData:data
+           withFileName:@"audio"
+           andContentType:nil forKey:@"audio"];
 
   [dataReq setCompletionBlock:^{
-    NSLog(@"Success."); 
+    NSLog(@"Success.");
   }];
 
   [dataReq setFailedBlock:^{
@@ -92,3 +95,41 @@ void WordTrainingApp::uploadSound(float *input, int bufferSize) {
   [dataReq startAsynchronous];
 }
 ```
+That's for the client side. You'd still have to process the reqeust in the sever.
+
+### Server Side - GO ###
+
+```
+func UploadRawSound(r *http.Request, params martini.Params) string {
+  file, _, err := r.FormFile("audio")
+  defer file.Close()
+  if err != nil {
+    return "500"
+  }
+
+  //Save a raw file
+  out, err := os.Create("upload/sample.raw")
+  defer out.Close()
+  if err != nil {
+    return "500"
+  }
+  _, err = io.Copy(out, file)
+  if err != nil {
+    return "500"
+  }
+
+  return "200"
+}
+
+```
+That's it. Now you can import the sample.raw file in Audacity with the following settings:
+
+```
+32 Bit Float
+Little Endian
+Sample Rate: 16000
+Channels: 1
+```
+Also depicted in the image below:
+
+![](images/audacitysettings.png)
