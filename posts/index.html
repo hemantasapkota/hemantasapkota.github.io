@@ -154,8 +154,9 @@
   recPos = 0;
   size = duration * sampleRate
   isRecording = false;
-  buffer.resize(size, 0.0);
-  //Note: these are some low fidelity settings. You'd want to sample at least @44100 with 2 output channels and 4 buffers
+  buffer.resize(size, 0.0); //buffer is a vector&lt;float&gt;
+  //Note: these are some low fidelity settings.
+  //You'd want to sample at least @44100 with 2 output channels and 4 buffers
   ofSoundStreamSetup(1, 1, this, sampleRate, 512, 1);
 }
 
@@ -175,17 +176,45 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 <h3 id="toc_1">Turning on/off the recording</h3>
 
 <pre><code>void ofApp::startListening() {
-  std::fill(buffer.Begin(), buffer.End(), 0)
+  std::fill(buffer.begin(), buffer.end(), 0)
   isRecording = true
 }
 
 void ofApp::stopListening() {
   isRecording = false;
-  uploadSound();
+
+  //Copy the vector into a buffer
+  int size = sizeof(float) * buffer.size();
+  float *myBuffer = new float[size];
+  memcpy(myBuffer, &amp;buffer[0], size);
+  uploadSound(myBuffer, size);
+  delete [] myBuffer;
 }
 </code></pre>
 
-<h3 id="toc_2">Uploading sound</h3>
+<h3 id="toc_2">Uploading sound with ASIHTTPRequest</h3>
+
+<p>We&rsquo;ll use POST request to send the raw data to the server.</p>
+
+<pre><code>void WordTrainingApp::uploadSound(float *input, int bufferSize) {
+  NSData *data = [[NSMutableData alloc] initWithBytes:input length:bufferSize];
+
+  ASIFormDataRequest *dataReq =
+  [ASIFormDataRequest requestWithURL:[NSURL URLWithString:@&quot;http://192.168.0.7:3000/rawsound/sample&quot;]];
+
+  [dataReq setData:data withFileName:@&quot;audio&quot; andContentType:nil forKey:@&quot;audio&quot;];
+
+  [dataReq setCompletionBlock:^{
+    NSLog(@&quot;Success.&quot;); 
+  }];
+
+  [dataReq setFailedBlock:^{
+    NSLog(@&quot;POST Error: %@&quot;, dataReq.error);
+  }];
+
+  [dataReq startAsynchronous];
+}
+</code></pre>
 
         </section>
     </div>
