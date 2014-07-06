@@ -21,7 +21,7 @@ Back to the problems:
 One solution is to simply upload the raw audio data and let the server decide the correct treatment.
 
 ### Openframeworks App Setup ###
-With the following setup, we're recording audio sampled @ 16000 for 3 seconds. The samples are accumulated in the buffer periodically. For details, checkout this book. (http://books.google.com.au/books?id=WRr2AAAAQBAJ&pg=PT335&lpg=PT335&dq=openframeworks+wav+writer&source=bl&ots=9nh9rs5_l6&sig=fkjtf65Q0cBHbp4K0DD1hPOOIyY&hl=en&sa=X&ei=p363U62_M86nkQXnpoGIBQ&ved=0CC0Q6AEwAg#v=onepage&q=openframeworks%20wav%20writer&f=false)
+With the following setup, we're recording audio sampled @ 16000 for 3 seconds. The samples are accumulated in the buffer periodically. For details, checkout this book. (http://books.google.com.au/books?id=WRr2AAAAQBAJ)
 
 ```
 void ofApp::setup() {
