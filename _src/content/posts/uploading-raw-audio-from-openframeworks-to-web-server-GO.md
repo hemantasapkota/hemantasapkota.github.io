@@ -73,7 +73,7 @@ void ofApp::stopListening() {
 We'll use POST request to send the raw data to the server.
 
 ```
-void WordTrainingApp::uploadSound(float *input, int bufferSize) {
+void ofApp::uploadSound(float *input, int bufferSize) {
   NSData *data = [[NSMutableData alloc] initWithBytes:input length:bufferSize];
 
   ASIFormDataRequest *dataReq =
@@ -95,7 +95,7 @@ void WordTrainingApp::uploadSound(float *input, int bufferSize) {
   [dataReq startAsynchronous];
 }
 ```
-That's for the client side. You'd still have to process the reqeust in the sever.
+That's for the client side. You'd still have to process the request in the sever.
 
 ### Server Side - GO ###
 
@@ -122,7 +122,7 @@ func UploadRawSound(r *http.Request, params martini.Params) string {
 }
 
 ```
-That's it. Now you can import the sample.raw file in Audacity with the following settings:
+That's it. Now you can import the sample.raw file in [Audacity](http://audacity.sourceforge.net/) with the following settings:
 
 ```
 32 Bit Float

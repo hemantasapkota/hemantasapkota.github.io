@@ -196,7 +196,7 @@ void ofApp::stopListening() {
 
 <p>We&rsquo;ll use POST request to send the raw data to the server.</p>
 
-<pre><code>void WordTrainingApp::uploadSound(float *input, int bufferSize) {
+<pre><code>void ofApp::uploadSound(float *input, int bufferSize) {
   NSData *data = [[NSMutableData alloc] initWithBytes:input length:bufferSize];
 
   ASIFormDataRequest *dataReq =
@@ -219,7 +219,7 @@ void ofApp::stopListening() {
 }
 </code></pre>
 
-<p>That&rsquo;s for the client side. You&rsquo;d still have to process the reqeust in the sever.</p>
+<p>That&rsquo;s for the client side. You&rsquo;d still have to process the request in the sever.</p>
 
 <h3 id="toc_3">Server Side - GO</h3>
 
@@ -246,7 +246,7 @@ void ofApp::stopListening() {
 
 </code></pre>
 
-<p>That&rsquo;s it. Now you can import the sample.raw file in Audacity with the following settings:</p>
+<p>That&rsquo;s it. Now you can import the sample.raw file in <a href="http://audacity.sourceforge.net/">Audacity</a> with the following settings:</p>
 
 <pre><code>32 Bit Float
 Little Endian
