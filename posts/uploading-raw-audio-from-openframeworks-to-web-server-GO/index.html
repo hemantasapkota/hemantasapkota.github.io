@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Consuming Binary Data in Angular with ProtobufJS </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/consuming-binary-data-in-protobufjs">
+    <title> Uploading raw audio data from Openframeworks (C&#43;&#43;) to web server (GO) - #IOSDEV </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/uploading-raw-audio-from-openframeworks-to-web-server-GO">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -60,48 +60,16 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Consuming Binary Data in Angular with ProtobufJS</h1>
+      <h1 class="post-title">Uploading raw audio data from Openframeworks (C&#43;&#43;) to web server (GO) - #IOSDEV</h1>
         <section id="main">
-          <h5 id="date"> Tue Jun 10, 2014 </h5>
-          <p>For one of the apps that I&rsquo;ve been working on, I have a server written in GO that sends out binary data encoded with Google Protobuf messages via. REST endpoints.
-For example:</p>
+          <h5 id="date"> Sun Jul 6, 2014 </h5>
+          <p>Working with audio recordings has several pain points associated with them, which I&rsquo;ll talk about below. The problems get compounded when you&rsquo;re working on devices with limited capacities like mobile phones.</p>
 
-<pre><code>message Word {
-  optional string name = 1;
-  optional string category = 2;
-}
+<p>Back to the problems:</p>
 
-message WordList {
-  repeated Word word = 1;
-}
-</code></pre>
-
-<p>The question is how do you consume the binary data in Angular ? The answer - Use <code>responseType: &quot;arraybuffer&quot;</code> in your <code>$http.get</code>.</p>
-
-<pre><code>$http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (data) -&gt;
-  ##Process data
-</code></pre>
-
-<p>The second question is how do you decode the binary data in Javascript/Angular ? The answer - Use <a href="https://github.com/dcodeIO/ProtoBuf.js">ProtobfJS</a>.</p>
-
-<p>Installation is easy with bower:
-<code>
-bower install --save protobuf
-</code></p>
-
-<p>Once installed, don&rsquo;t forget to add libs in your index.html.</p>
-
-<pre><code>&lt;script src=&quot;bower_components/bytebuffer/ByteBuffer.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bower_components/ProtoBuf/ProtoBuf.min.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-
-<p>Finally, decoding the data.</p>
-
-<pre><code>WordList = dcodeIO.ProtoBuf.loadProtoFile(&quot;/model&quot;).build(&quot;model.WordList&quot;)
-$http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (data) -&gt;
-  wlist = WordList.decode(data)
-  $scope.words = wlist.word
-</code></pre>
+<ul>
+<li>RAW audio data are huge. A 3 Seconds recording sampled @ 44100 is about 529 KB in size. Storing it permanently in iphone/android/ipad wouldn&rsquo;t be a good idea. See (<a href="http://stackoverflow.com/questions/22292677/apps-must-follow-the-ios-data-storage-guidelines-or-they-will-be-rejected-in-app">http://stackoverflow.com/questions/22292677/apps-must-follow-the-ios-data-storage-guidelines-or-they-will-be-rejected-in-app</a>)</li>
+</ul>
 
         </section>
     </div>
@@ -115,14 +83,10 @@ $http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku">Using LevelDB &amp; Go with Heroku without addons</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/thank-god-for-masonry-iosdev"> &nbsp; Thank God for Masonry - #IOSDev</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/debugging-exc-bad-access-iosdev"> &nbsp; Debugging EXC_BAD_ACCESS - #IOSDEV</a> &raquo;
     </span>
   
 </div>
@@ -133,15 +97,17 @@ $http.get(&quot;/words&quot;, {responseType: &quot;arraybuffer&quot;}).success (
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/google-protobuf">Google Protobuf</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/creativecoding">CreativeCoding</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/protobufjs">ProtobufJS</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/raw-audio-data">Raw Audio Data</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/binary-wire-data">Binary Wire Data</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/openframeworks">OpenFrameworks</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/coffeescript">Coffeescript</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/go">Go</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/angularjs">AngularJS</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/asihttprequest">ASIHttpRequest</a> </li>
+    
+      <li><a href="http://hemantasapkota.github.io/categories/iosdev">IOSDEV</a> </li>
     
   </ul>
 </div>
