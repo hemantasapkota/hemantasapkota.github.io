@@ -15,3 +15,5 @@ Working with audio recordings has several pain points associated with them, whic
 Back to the problems:
 
 * RAW audio data are huge. A 3 Seconds recording sampled @ 44100 is about 529 KB in size. Storing it permanently in iphone/android/ipad wouldn't be a good idea. See (http://stackoverflow.com/questions/22292677/apps-must-follow-the-ios-data-storage-guidelines-or-they-will-be-rejected-in-app)
+
+* Sample
