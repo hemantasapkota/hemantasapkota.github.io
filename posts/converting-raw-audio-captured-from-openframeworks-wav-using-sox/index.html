@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://hemantasapkota.github.io/">
-    <title> Thank God for Masonry - #IOSDev </title>
-    <link rel="canonical" href="http://hemantasapkota.github.io/posts/thank-god-for-masonry-iosdev">
+    <title> Converting raw audio data captured from openframeworks to wav using SOX </title>
+    <link rel="canonical" href="http://hemantasapkota.github.io/posts/converting-raw-audio-captured-from-openframeworks-wav-using-sox">
     
 
 <link rel="stylesheet" href="http://hemantasapkota.github.io/css/poole.css">
@@ -60,11 +60,19 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Thank God for Masonry - #IOSDev</h1>
+      <h1 class="post-title">Converting raw audio data captured from openframeworks to wav using SOX</h1>
         <section id="main">
-          <h5 id="date"> Tue Jun 10, 2014 </h5>
-          <p>Masonry is a framework built on top of Auto Layout for constructing layouts for IOS/OSX.
-It comes with its own DSL.</p>
+          <h5 id="date"> Mon Jul 7, 2014 </h5>
+          <pre><code>sox -r 16000 -e floating-point -b 32 -c 1 input.raw output.wav
+</code></pre>
+
+<p>where</p>
+
+<pre><code>-r 16000          -&gt; Sampling rate of 16000
+-e floating-point -&gt; Encoded with floating point numbers
+-b 32             -&gt; Bits/Sample 32
+-c 1              -&gt; No. of input channels 1
+</code></pre>
 
         </section>
     </div>
@@ -78,14 +86,10 @@ It comes with its own DSL.</p>
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://hemantasapkota.github.io/posts/using-leveldb-in-go-heroku">Using LevelDB &amp; Go with Heroku without addons</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/consuming-binary-data-in-protobufjs"> &nbsp; Consuming Binary Data in Angular with ProtobufJS</a> &raquo;
+    <em>Next: </em><a class="next" href="http://hemantasapkota.github.io/posts/uploading-raw-audio-from-openframeworks-to-web-server-GO"> &nbsp; Uploading raw audio data from Openframeworks (C&#43;&#43;) to web server (GO) - #IOSDEV</a> &raquo;
     </span>
   
 </div>
@@ -96,11 +100,11 @@ It comes with its own DSL.</p>
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/iosdev">IOSDev</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/openframeworks">OpenFrameworks</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/https//github.com/masonry/masonry">https://github.com/Masonry/Masonry</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/iosdev">IOSDEV</a> </li>
     
-      <li><a href="http://hemantasapkota.github.io/categories/xcode-autolayout">XCode AutoLayout</a> </li>
+      <li><a href="http://hemantasapkota.github.io/categories/sox">SOX</a> </li>
     
   </ul>
 </div>
