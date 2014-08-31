@@ -8,7 +8,7 @@ hugo
 git add -A :/
 
 # Commit changes.
-msg="Updating content `date`"
+msg="Fix GA `date`"
 if [ $# -eq 1 ]
   then msg="$1"
 fi
