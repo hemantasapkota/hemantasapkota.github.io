@@ -15,6 +15,9 @@
           <a href="/posts" title="Blog">Blog Posts</a>
         </h3>
       </div>
+
+      {{ template "chrome/discus.html" . }}
+
     </div>
 
     <!--
@@ -42,8 +45,6 @@
   {{ template "chrome/prev_next.html" . }}
   <br />
   {{ template "chrome/categories.html" . }}
-
-  {{ template "chrome/discus.html" . }}
 
   <!-- Include footer (ends <body class="theme-base-08"> and <html>) -->
   {{ template "chrome/footer.html" }}
