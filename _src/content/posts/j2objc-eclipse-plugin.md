@@ -9,6 +9,8 @@ categories:
     - "Projects"
 ---
 ## News ##
+ - **31 August 2014**
+   * Don't export Android project's JNI headers by adding filtering mechanism.
  - **21 April 2014**
    * Use GitHUB to host the update site.
    * Update blog.
