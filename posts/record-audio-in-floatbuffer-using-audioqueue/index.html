@@ -71,6 +71,48 @@
 
 <p>The usual option is to record the data into a file, ex: AIF format. Recording in a float buffer allows you to process the audio data for needs like visualiations, futher processing with algorithms, speech recognition etc.</p>
 
+<h3 id="toc_1">AudioRecorder.h</h3>
+
+<pre><code>#ifndef SpeechBookWormSwift_AudioRecorder_h
+#define SpeechBookWormSwift_AudioRecorder_h
+
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;AudioToolbox/AudioQueue.h&gt;
+#import &lt;AudioToolbox/AudioFile.h&gt;
+
+#import &quot;ASREngine.h&quot;
+
+#define NUM_BUFFERS 1
+
+typedef struct
+{
+  AudioStreamBasicDescription dataFormat;
+  AudioQueueRef               queue;
+  AudioQueueBufferRef         buffers[NUM_BUFFERS];
+  AudioFileID                 audioFile;
+  SInt64                      currentPacket;
+  bool                        recording;
+}RecordState;
+
+void AudioInputCallback(void * inUserData,  // Custom audio metadata
+                        AudioQueueRef inAQ,
+                        AudioQueueBufferRef inBuffer,
+                        const AudioTimeStamp * inStartTime,
+                        UInt32 inNumberPacketDescriptions,
+                        const AudioStreamPacketDescription * inPacketDescs);
+
+@interface AudioRecorder : NSObject {
+  RecordState recordState;
+}
+
+- (void)setupAudioFormat:(AudioStreamBasicDescription*)format;
+- (void)startRecording;
+- (void)stopRecording;
+
+@end
+#endif
+</code></pre>
+
         </section>
     </div>
   </div>
