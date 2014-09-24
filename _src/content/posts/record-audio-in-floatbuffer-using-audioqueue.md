@@ -48,6 +48,7 @@ void AudioInputCallback(void * inUserData,  // Custom audio metadata
 - (void)setupAudioFormat:(AudioStreamBasicDescription*)format;
 - (void)startRecording;
 - (void)stopRecording;
+- (void)feedSamplesToEngine:(UInt32)audioDataBytesCapacity audioData:(void *)audioData;
 
 @end
 #endif
@@ -61,6 +62,8 @@ void AudioInputCallback(void * inUserData,  // Custom audio metadata
 
 @implementation AudioRecorder
 
+void *refToSelf;
+
 void AudioInputCallback(void * inUserData,  // Custom audio metadata
                         AudioQueueRef inAQ,
                         AudioQueueBufferRef inBuffer,
@@ -68,14 +71,14 @@ void AudioInputCallback(void * inUserData,  // Custom audio metadata
                         UInt32 inNumberPacketDescriptions,
                         const AudioStreamPacketDescription * inPacketDescs) {
 
-    RecordState * recordState = (RecordState*)inUserData;
+  RecordState * recordState = (RecordState*)inUserData;
 
-    AudioQueueEnqueueBuffer(recordState->queue, inBuffer, 0, NULL);
+  AudioQueueEnqueueBuffer(recordState->queue, inBuffer, 0, NULL);
 
-    AudioRecorder *rec = (AudioRecorder *) refToSelf;
-    [rec feedSamplesToEngine:inBuffer->mAudioDataBytesCapacity audioData:inBuffer->mAudioData];
+  AudioRecorder *rec = (AudioRecorder *) refToSelf;
 
-    }
+  [rec feedSamplesToEngine:inBuffer->mAudioDataBytesCapacity audioData:inBuffer->mAudioData];
+}
 
 - (id)init
 {
@@ -138,6 +141,16 @@ void AudioInputCallback(void * inUserData,  // Custom audio metadata
 
   AudioQueueDispose(recordState.queue, true);
   AudioFileClose(recordState.audioFile);
+}
+
+- (void)feedSamplesToEngine:(UInt32)audioDataBytesCapacity audioData:(void *)audioData {
+  int sampleCount = audioDataBytesCapacity / sizeof(AUDIO_DATA_TYPE_FORMAT);
+  AUDIO_DATA_TYPE_FORMAT *samples = (AUDIO_DATA_TYPE_FORMAT*)audioData;
+
+  //Do something with the samples
+  for ( int i = 0; i < sampleCount; i++) {
+    //Do something with samples[i]
+  }
 }
 
 @end
