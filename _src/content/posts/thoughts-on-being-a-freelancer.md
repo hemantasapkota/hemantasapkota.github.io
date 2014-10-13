@@ -21,7 +21,7 @@ In the meantime, I'll work on setting up a good profile for ODesk and hopefully 
 
 **Update - 13 Oct 2014**
 
-I took a newer and mored advanced IOS test. Definitely better than the last time.
+I took a newer and more advanced IOS test. Definitely better than the last time.
 
 ![][2]
 
