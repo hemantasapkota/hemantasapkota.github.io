@@ -11,9 +11,37 @@ categories:
 
 Take a look the following layout:
 
-
 {{% figure src="images/masonry-demo1.PNG" %}}
 
+With Masonry
 
+```
+menuView = [[UIView alloc] initWithFrame:[MASUtil frame]];
+[self.containerView addSubview:menuView];
 
+[menuView makeConstraints:^(MASConstraintMaker *make) {
+  make.edges.equalTo(self.containerView);
+}];
 
+FUIButton *startBtn = [FlatUIUtil makeSuccessBtn];
+[startBtn setTitle:@"START" forState:UIControlStateNormal];
+[startBtn addTarget:self action:@selector(onStartPressed:) forControlEvents:UIControlEventTouchUpInside];
+[menuView addSubview:startBtn];
+
+[startBtn makeConstraints:^(MASConstraintMaker *make) {
+  [self makeBtnWidth:make];
+  make.centerX.equalTo(self.childView.centerX);
+  make.centerY.equalTo(self.childView.centerY).with.offset([MASUtil makeDim:-40]);
+}];
+
+FUIButton *exitBtn = [FlatUIUtil makeDangerBtn];
+[exitBtn setTitle:@"QUIT" forState:UIControlStateNormal];
+[exitBtn addTarget:self action:@selector(onQuitPressed:) forControlEvents:UIControlEventTouchUpInside];
+[menuView addSubview:exitBtn];
+
+[exitBtn makeConstraints:^(MASConstraintMaker *make) {
+  [self makeBtnWidth:make];
+  make.centerX.equalTo(self.childView.centerX);
+  make.top.greaterThanOrEqualTo(startBtn.bottom).with.offset(offy);
+}];
+```
