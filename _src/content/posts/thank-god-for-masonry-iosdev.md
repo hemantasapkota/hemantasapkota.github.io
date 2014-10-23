@@ -12,7 +12,7 @@ categories:
 Take a look the following layout:
 
 
-{{% img images/masonry-demo1.PNG %}}
+{{% figure src="images/masonry-demo1.PNG" %}}
 
 
 
