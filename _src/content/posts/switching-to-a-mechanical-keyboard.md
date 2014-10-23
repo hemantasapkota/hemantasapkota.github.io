@@ -23,9 +23,8 @@ actually bottom out.  This feedback makes it possible for the typist to stop
 pushing before the key bottoms out, reducing total effort by up to a (measured)
 factor of two.*
 
-I wanted to get the [CODE 87-Key Mechanical Keyboard - Cherry MX Green](http://www.wasdkeyboards.com/index.php/products/code-keyboard/code-87-key-mechanical-keyboard-mx-green.html#ad-image-0)
+I wanted to get the ![CODE 87-Key Mechanical Keyboard - Cherry MX Green](http://blog.codinghorror.com/content/images/uploads/2013/08/6a0120a85dcdae970b01901f0872ad970b-800wi.jpg)
 but the shipping to Australia is too damm expensive. $165 + $60 shipping.
-![Code Keyboard](http://cdn.wasdkeyboards.com/media/catalog/product/cache/1/thumbnail/492x/040ec09b1e35df139433887a97daa66f/c/o/code-87-bright_1.jpg)
 
 Instead, I got the Steel Series gaming mechanical keyboard from Jb-Hifi, priced
 at $125.
