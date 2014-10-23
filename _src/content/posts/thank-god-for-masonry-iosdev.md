@@ -11,8 +11,9 @@ categories:
 
 Take a look the following layout:
 
-![][1]
+
+{{% img images/masonry-demo1.PNG %}}
 
 
 
-  [1]: images/masonry-demo1.PNG =250x
+
