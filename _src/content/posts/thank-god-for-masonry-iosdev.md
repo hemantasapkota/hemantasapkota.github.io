@@ -9,3 +9,11 @@ categories:
 ---
 Masonry is a framework built on top of Auto Layout for constructing layouts for IOS/OSX.
 It comes with its own DSL. It's a boon for constructing layouts for devices of multiple sizes.
+
+Take a look the following layout:
+
+![1]
+
+
+  [1]: (images/masonry-demo1.PNG)
+
