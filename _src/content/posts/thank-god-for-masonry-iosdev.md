@@ -11,7 +11,7 @@ categories:
 
 Take a look the following layout:
 
-{{% figure src="images/masonry-demo1.PNG" %}}
+{{% figure src="images/masonry-demo1.PNG" style="width:50%" %}}
 
 With Masonry
 
