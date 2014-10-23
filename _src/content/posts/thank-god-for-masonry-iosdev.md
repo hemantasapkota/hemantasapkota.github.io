@@ -13,7 +13,7 @@ Take a look the following layout:
 
 {{% figure src="images/masonry-demo1.PNG" style="width:50%" %}}
 
-With Masonry
+With Masonry, You'd do something like below to code the layout.
 
 ```
 menuView = [[UIView alloc] initWithFrame:[MASUtil frame]];
