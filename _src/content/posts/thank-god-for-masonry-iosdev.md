@@ -1,7 +1,7 @@
 ---
 title: "Thank God for Masonry - #IOSDev"
 description: "Use Masonry to programmatically create layout for your IOS apps superfast!"
-date: "2014-09-15"
+date: "2014-10-15"
 categories:
     - "IOSDev"
     - "https://github.com/Masonry/Masonry"
